@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PornWiki.org — The Independent Adult Entertainment & Media Industry Encyclopedia</title>
+    <meta name="description" content="PornWiki.org is an independent digital encyclopedia providing verified performer biographies, career statistics, studio archives, sexual health guidelines, and industry glossaries.">
+    <meta name="robots" content="index, follow">
+    <meta name="rating" content="RTA-5042-1996-1400-1577-RTA">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                            900: '#4c0519',
+                        },
+                        darkbg: '#090d16',
+                        cardbg: '#111827',
+                        bordercolor: '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .nsfw-blur { filter: blur(24px); transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .nsfw-blur.revealed { filter: blur(0px); }
+        .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-rose-600 selection:text-white">
+
+    <!-- Screen Reader Announcer -->
+    <div id="sr-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Age Verification Gate -->
+    <div id="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" class="fixed inset-0 z-[100] bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-lg w-full p-6 sm:p-8 text-center shadow-2xl relative space-y-5">
+            <div class="w-16 h-16 bg-rose-500/10 border border-rose-500/20 text-rose-500 rounded-full flex items-center justify-center mx-auto text-2xl font-black shadow-inner">
+                18+
+            </div>
+            <div>
+                <h1 id="age-gate-title" class="text-2xl font-extrabold text-white tracking-tight">Age Verification & Access Protocols</h1>
+                <p class="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed">
+                    PornWiki.org is an independent, non-explicit digital encyclopedia and educational reference database documenting the adult entertainment industry.
+                </p>
+                <div class="bg-slate-950/60 border border-slate-800 rounded-lg p-3 mt-4 text-[11px] text-slate-400 text-left space-y-1">
+                    <p><i class="fa-solid fa-circle-info text-rose-400 mr-1"></i> You must be at least 18 years old or the legal age of majority in your jurisdiction to proceed.</p>
+                    <p><i class="fa-solid fa-shield-halved text-emerald-400 mr-1"></i> All biographical and technical entries comply with verified editorial policies.</p>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <button onclick="rejectAge()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-3 px-4 rounded-xl transition">
+                    Under 18 — Exit
+                </button>
+                <button onclick="acceptAge()" class="flex-1 bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold py-3 px-4 rounded-xl shadow-lg transition shadow-rose-900/30">
+                    18 or Older — Enter Encyclopedia
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between py-2.5 sm:h-16 gap-3">
+                
+                <div class="flex items-center justify-between shrink-0">
+                    <a href="#" onclick="showSection('home')" class="flex items-center space-x-2">
+                        <span class="bg-slate-800 text-rose-400 border border-slate-700 font-black text-lg px-2.5 py-1 rounded-lg tracking-wider shadow-sm">
+                            Porn<span class="text-slate-100 font-light">Wiki</span>
+                        </span>
+                        <span class="text-[10px] font-mono uppercase bg-slate-800 text-slate-400 px-2 py-0.5 rounded border border-slate-700">Org</span>
+                    </a>
+                    <button onclick="toggleMobileNav()" aria-label="Toggle Navigation" class="sm:hidden text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+
+                <div class="flex-1 max-w-md relative">
+                    <label for="global-search" class="sr-only">Search encyclopedia</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                        <input type="text" id="global-search" onkeyup="handleSearch()" placeholder="Search performers, studios, positions, health protocols..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 transition">
+                    </div>
+                </div>
+
+                <nav class="hidden sm:flex items-center space-x-1 text-xs font-semibold text-slate-300">
+                    <button onclick="showSection('browse', 'Actress')" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Performers</button>
+                    <button onclick="showSection('browse', 'Studio')" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Studios</button>
+                    <button onclick="showSection('browse', 'Position')" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Positions</button>
+                    <button onclick="showSection('browse', 'Health')" class="px-3 py-2 rounded-lg hover:bg-slate-800 text-emerald-400 transition">Health & Safety</button>
+                    <button onclick="showSection('admin')" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition border border-slate-700"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Editor Desk</button>
+                </nav>
+            </div>
+        </div>
+
+        <div id="mobile-nav" class="hidden sm:hidden border-t border-slate-800 bg-slate-900 px-4 pt-2 pb-4 space-y-2 text-xs">
+            <button onclick="showSection('browse', 'Actress'); toggleMobileNav();" class="w-full text-left py-2 text-slate-300 hover:text-rose-400">Performers (Actors & Models)</button>
+            <button onclick="showSection('browse', 'Studio'); toggleMobileNav();" class="w-full text-left py-2 text-slate-300 hover:text-rose-400">Studios & Networks</button>
+            <button onclick="showSection('browse', 'Position'); toggleMobileNav();" class="w-full text-left py-2 text-slate-300 hover:text-rose-400">Sexual Positions & Techniques</button>
+            <button onclick="showSection('browse', 'Health'); toggleMobileNav();" class="w-full text-left py-2 text-emerald-400 hover:text-emerald-300">Sexual Health & Safety Protocols</button>
+            <button onclick="showSection('admin'); toggleMobileNav();" class="w-full text-left py-2 text-rose-400 font-bold"><i class="fa-solid fa-lock mr-1"></i> Editor Panel Access</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- SEARCH RESULTS PANEL -->
+        <section id="search-results-section" class="hidden mb-8 bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                <h2 class="text-lg font-bold text-slate-100 flex items-center gap-2">
+                    <i class="fa-solid fa-magnifying-glass text-rose-500"></i>
+                    Search Matches (<span id="search-count">0</span> entries)
+                </h2>
+                <button onclick="clearSearch()" class="text-xs text-slate-400 hover:text-slate-200"><i class="fa-solid fa-xmark mr-1"></i> Close</button>
+            </div>
+            <div id="search-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        </section>
+
+        <!-- VIEW 1: HOMEPAGE -->
+        <section id="section-home" class="space-y-8">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 text-center max-w-3xl mx-auto space-y-4 shadow-xl relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-48 h-48 bg-rose-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+                    The Independent Adult Media & Industry Encyclopedia
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
+                    Explore verified performer profiles, adult studio networks, illustrative sexual positions, and rigorous health & safety protocols.
+                </p>
+                <div class="pt-1 space-y-3">
+                    <div>
+                        <button onclick="showSection('browse', 'all')" class="bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-lg shadow-rose-950/50">
+                            Explore Full Encyclopedia Index
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-slate-500 pt-1">
+                        Verified Non-Explicit Metadata · <a href="#" onclick="showSection('contact')" class="text-slate-400 hover:text-rose-400 underline">Submit Corrections</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-4 max-w-5xl mx-auto">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300">Featured Encyclopedia Entries</h2>
+                    <button onclick="showSection('browse', 'all')" class="text-xs text-rose-400 hover:text-rose-300 font-semibold">View All Entries →</button>
+                </div>
+                <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+            </div>
+            
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 max-w-5xl mx-auto space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Directory Alphabetical Index (A–Z)</span>
+                    <a href="#" onclick="showPolicy('editorial')" class="text-[11px] text-rose-400 hover:underline">Editorial Guidelines</a>
+                </div>
+                <div id="az-buttons" class="flex flex-wrap gap-1 text-xs font-mono"></div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: DIRECTORY BROWSE -->
+        <section id="section-browse" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <h1 class="text-2xl font-black text-white" id="browse-title">Encyclopedia Directory</h1>
+                    <p class="text-xs text-slate-400 mt-1" id="browse-desc">Browse performers, adult studios, technical positions, and safety protocols.</p>
+                </div>
+
+                <div class="flex flex-wrap gap-2 text-xs font-medium">
+                    <button onclick="setFilter('all')" id="filter-all" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white">All Entries</button>
+                    <button onclick="setFilter('Actress')" id="filter-Actress" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Performers</button>
+                    <button onclick="setFilter('Studio')" id="filter-Studio" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Studios</button>
+                    <button onclick="setFilter('Position')" id="filter-Position" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Positions</button>
+                    <button onclick="setFilter('Health')" id="filter-Health" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Health & Safety</button>
+                </div>
+            </div>
+
+            <div id="browse-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </section>
+
+        <!-- VIEW 3: ADMIN EDITOR PANEL -->
+        <section id="section-admin" class="hidden space-y-6 max-w-4xl mx-auto">
+            <div id="admin-auth-card" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4 max-w-md mx-auto">
+                <div class="text-center space-y-2">
+                    <div class="w-12 h-12 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-full flex items-center justify-center mx-auto text-xl">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-white">Only Admin Access</h1>
+                    <p class="text-xs text-slate-400">Enter your secure passcode to access the publishing dashboard.</p>
+                </div>
+                <div class="space-y-3 pt-2">
+                    <div>
+                        <label for="admin-passcode" class="block text-xs font-semibold text-slate-400 uppercase mb-1">Access Passcode</label>
+                        <input type="password" id="admin-passcode" placeholder="Enter secure passcode" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
+                    </div>
+                    <button onclick="authenticateAdmin()" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                        Unlock Publishing Panel
+                    </button>
+                    <p id="auth-error" class="text-rose-400 text-[11px] text-center hidden font-semibold">Invalid Passcode!</p>
+                </div>
+            </div>
+
+            <div id="admin-desk" class="hidden space-y-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                        <div>
+                            <span class="text-xs font-mono font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1 rounded-full uppercase" id="admin-form-mode-label">Editor Mode: Create New Entry</span>
+                            <h1 class="text-xl font-extrabold text-white mt-2" id="admin-form-heading">Publish New Encyclopedia Entry</h1>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button id="cancel-edit-btn" onclick="resetAdminForm()" class="hidden text-xs text-amber-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">Cancel Edit</button>
+                            <button onclick="lockAdmin()" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                                <i class="fa-solid fa-lock mr-1"></i> Lock Desk
+                            </button>
+                        </div>
+                    </div>
+
+                    <form id="publish-form" onsubmit="handlePublishEntry(event)" class="space-y-6">
+                        <input type="hidden" id="edit-entry-id" value="">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="entry-name" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Entry Title / Name</label>
+                                <input type="text" id="entry-name" required placeholder="e.g. Angela White, Brazzers, Missionary Position" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white focus:border-rose-500">
+                            </div>
+                            <div>
+                                <label for="entry-category" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Category</label>
+                                <select id="entry-category" onchange="switchAdminTemplate()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white focus:border-rose-500">
+                                    <option value="Actress">Performer (Actor / Model)</option>
+                                    <option value="Studio">Studio & Network</option>
+                                    <option value="Position">Sexual Position & Technique</option>
+                                    <option value="Health">Sexual Health & Safety Protocol</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 1. PERFORMER TEMPLATE -->
+                        <div id="template-performer" class="category-template bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider"><i class="fa-solid fa-user mr-1"></i> Performer Profile Parameters</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <div>
+                                    <label for="p-birthdate" class="block text-[10px] text-slate-400 uppercase mb-1">Birthdate</label>
+                                    <input type="text" id="p-birthdate" placeholder="March 4, 1985" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-height" class="block text-[10px] text-slate-400 uppercase mb-1">Height</label>
+                                    <input type="text" id="p-height" placeholder="5'8&quot; (173 cm)" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-weight" class="block text-[10px] text-slate-400 uppercase mb-1">Weight</label>
+                                    <input type="text" id="p-weight" placeholder="130 lbs (59 kg)" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-measurements" class="block text-[10px] text-slate-400 uppercase mb-1">Measurements</label>
+                                    <input type="text" id="p-measurements" placeholder="36D-26-38" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-hair" class="block text-[10px] text-slate-400 uppercase mb-1">Hair Color</label>
+                                    <input type="text" id="p-hair" placeholder="Brunette" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-eyes" class="block text-[10px] text-slate-400 uppercase mb-1">Eye Color</label>
+                                    <input type="text" id="p-eyes" placeholder="Brown" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-tattoos" class="block text-[10px] text-slate-400 uppercase mb-1">Tattoos / Piercings</label>
+                                    <input type="text" id="p-tattoos" placeholder="Small wrist tattoo" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-years" class="block text-[10px] text-slate-400 uppercase mb-1">Active Years</label>
+                                    <input type="text" id="p-years" placeholder="2003 - Present" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-nationality" class="block text-[10px] text-slate-400 uppercase mb-1">Nationality / Origin</label>
+                                    <input type="text" id="p-nationality" placeholder="Australian" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                                <div>
+                                    <label for="p-awards" class="block text-[10px] text-slate-400 uppercase mb-1">Major Awards & Honors</label>
+                                    <input type="text" id="p-awards" placeholder="AVN Hall of Fame, XBIZ Award" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2.5 text-white">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. STUDIO TEMPLATE -->
+                        <div id="template-studio" class="category-template hidden bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="text-xs font-bold text-blue-400 uppercase tracking-wider"><i class="fa-solid fa-building mr-1"></i> Studio & Network Parameters</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                <div>
+                                    <label for="s-hq" class="block text-[10px] text-slate-400 uppercase">Headquarters / Location</label>
+                                    <input type="text" id="s-hq" placeholder="Montreal, Canada" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+                                </div>
+                                <div>
+                                    <label for="s-founded" class="block text-[10px] text-slate-400 uppercase">Founded Year</label>
+                                    <input type="text" id="s-founded" placeholder="2005" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+                                </div>
+                                <div>
+                                    <label for="s-parent" class="block text-[10px] text-slate-400 uppercase">Parent Company / Network</label>
+                                    <input type="text" id="s-parent" placeholder="MindGeek / Aylo" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. POSITION TEMPLATE -->
+                        <div id="template-position" class="category-template hidden bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="text-xs font-bold text-purple-400 uppercase tracking-wider"><i class="fa-solid fa-book-bookmark mr-1"></i> Position & Technique Parameters</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                <div>
+                                    <label for="pos-difficulty" class="block text-[10px] text-slate-400 uppercase">Difficulty Level</label>
+                                    <input type="text" id="pos-difficulty" placeholder="Beginner / Intermediate / Advanced" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+                                </div>
+                                <div>
+                                    <label for="pos-intimacy" class="block text-[10px] text-slate-400 uppercase">Intimacy & Closeness</label>
+                                    <input type="text" id="pos-intimacy" placeholder="High Eye Contact & Closeness" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+                                </div>
+                                <div>
+                                    <label for="pos-origin" class="block text-[10px] text-slate-400 uppercase">Historical Origin</label>
+                                    <input type="text" id="pos-origin" placeholder="Traditional / Ancient" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. HEALTH TEMPLATE -->
+                        <div id="template-health" class="category-template hidden bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider"><i class="fa-solid fa-shield-heart mr-1"></i> Health Protocol Parameters</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <div>
+                                    <label for="h-frequency" class="block text-[10px] text-slate-400 uppercase">Testing Frequency / Standard</label>
+                                    <input type="text" id="h-frequency" placeholder="Every 14 Days (PASS Protocol)" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+                                </div>
+                                <div>
+                                    <label for="h-agency" class="block text-[10px] text-slate-400 uppercase">Compliance Agency</label>
+                                    <input type="text" id="h-agency" placeholder="Independent Medical Laboratories" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Images & Blur Settings -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider">Image URLs & Granular Blur Control</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <label for="entry-main-img" class="block text-xs font-semibold text-slate-300 mb-1">Primary Featured Image URL</label>
+                                    <input type="url" id="entry-main-img" required placeholder="https://i.ibb.co/example.jpg" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white">
+                                </div>
+                                <div class="flex items-center space-x-2 pt-1">
+                                    <input type="checkbox" id="entry-main-sensitive" class="rounded bg-slate-900 border-slate-700 text-rose-600 focus:ring-rose-500">
+                                    <label for="entry-main-sensitive" class="text-xs text-slate-300">Apply 18+ Blur Overlay to Main Featured Photo</label>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-slate-800 pt-3 space-y-3">
+                                <label for="entry-gallery-imgs" class="block text-xs font-semibold text-slate-300">Gallery Image URLs (Comma-separated links)</label>
+                                <input type="text" id="entry-gallery-imgs" placeholder="https://i.ibb.co/img1.jpg, https://i.ibb.co/img2.jpg" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white">
+                                <div class="flex items-center space-x-2">
+                                    <input type="checkbox" id="entry-gallery-sensitive" class="rounded bg-slate-900 border-slate-700 text-rose-600 focus:ring-rose-500">
+                                    <label for="entry-gallery-sensitive" class="text-xs text-slate-300">Apply 18+ Blur Overlay to Gallery Photos</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="entry-bio" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Extensive Biography, Description & Historical Data</label>
+                            <textarea id="entry-bio" rows="6" required placeholder="Provide comprehensive biographical detail, studio history, technical instructions, or medical safety standards..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-white focus:border-rose-500"></textarea>
+                        </div>
+
+                        <button type="submit" id="submit-btn-text" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg shadow-rose-950/50">
+                            Publish Entry to Live Encyclopedia
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Manage Table -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-white">Manage Existing Encyclopedia Entries</h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Edit parameters, change blur settings, or remove articles instantly.</p>
+                        </div>
+                        <span id="admin-entries-count" class="text-xs font-mono bg-slate-800 text-slate-300 px-2.5 py-1 rounded-lg border border-slate-700">0 Entries</span>
+                    </div>
+
+                    <div class="overflow-x-auto custom-scroll">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="bg-slate-950 text-slate-400 uppercase text-[10px]">
+                                <tr>
+                                    <th class="p-3">Title / Name</th>
+                                    <th class="p-3">Category</th>
+                                    <th class="p-3">Active Era / Details</th>
+                                    <th class="p-3 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-entries-table-body" class="divide-y divide-slate-800"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: CONTACT & CORRECTIONS -->
+        <section id="section-contact" class="hidden space-y-6 max-w-2xl mx-auto">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
+                <div>
+                    <span class="text-xs font-bold text-rose-500 uppercase tracking-wider">Editorial Integrity Desk</span>
+                    <h1 class="text-2xl font-extrabold text-white mt-1">Biographical Corrections & Rights Inquiries</h1>
+                    <p class="text-xs text-slate-400 mt-1 leading-relaxed">
+                        PornWiki.org is committed to factual biographical precision and copyright compliance. Submit verified updates or rights inquiries below.
+                    </p>
+                </div>
+
+                <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                    <input type="hidden" name="access_key" value="43888668-57fa-43d9-a968-6343e80ae437">
+                    <input type="hidden" name="subject" id="form-subject-hidden" value="PornWiki Correction Report">
+                    <input type="hidden" name="from_name" value="PornWiki Direct Desk">
+
+                    <div>
+                        <label for="contact-name" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Your Name / Organization</label>
+                        <input type="text" id="contact-name" name="name" required placeholder="Full Name or Media Contact" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label for="contact-email" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Verified Email Address</label>
+                        <input type="email" id="contact-email" name="email" required placeholder="contact@domain.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-rose-500">
+                    </div>
+                    <div>
+                        <label for="contact-subject-select" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Inquiry Type</label>
+                        <select id="contact-subject-select" onchange="updateFormSubject()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-rose-500">
+                            <option value="Biographical Correction">Biographical Correction / Physical Data Update</option>
+                            <option value="DMCA Rights Concern">Copyright & Media Removal Request</option>
+                            <option value="Editorial Feedback">General Historical Feedback</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="contact-message" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Detailed Explanation</label>
+                        <textarea id="contact-message" name="message" rows="5" required placeholder="Provide reference links, verified profile identifiers, or rights documentation..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-slate-200 focus:outline-none focus:border-rose-500"></textarea>
+                    </div>
+
+                    <div id="contact-status-box" class="hidden p-4 rounded-xl text-xs"></div>
+
+                    <button type="submit" id="contact-submit-btn" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg shadow-rose-950/50">
+                        Dispatch Correction Report to Secure Inbox
+                    </button>
+                </form>
+
+                <div class="border-t border-slate-800 pt-4 text-[11px] text-slate-500">
+                    <p><i class="fa-solid fa-envelope mr-1 text-slate-400"></i> Direct Desk Inbox (Opera Secure): <code class="text-slate-400">pornwiki.official@gmail.com</code></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: POLICIES -->
+        <section id="section-policy" class="hidden max-w-4xl mx-auto space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 space-y-8 text-xs text-slate-300 leading-relaxed">
+                <div>
+                    <span class="text-xs font-mono font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1 rounded-full uppercase">Legal Framework</span>
+                    <h1 id="policy-title" class="text-2xl font-black text-white mt-3">Institutional & Legal Policies</h1>
+                </div>
+                <div id="policy-content" class="space-y-6"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ENTRY DETAIL MODAL -->
+    <div id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+            
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+                <div class="flex items-center space-x-3">
+                    <span id="modal-category" class="text-[10px] font-mono font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2.5 py-1 rounded-full uppercase">Category</span>
+                    <h2 id="modal-title" class="text-xl font-extrabold text-white">Profile Name</h2>
+                </div>
+                <button onclick="closeModal()" aria-label="Close modal" class="text-slate-400 hover:text-white text-lg p-1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto custom-scroll space-y-6 text-xs text-slate-300">
+                <div id="modal-visual-container" class="relative rounded-xl overflow-hidden bg-slate-950 border border-slate-800 max-h-80 flex items-center justify-center">
+                    <img id="modal-image" src="" alt="Primary visual" class="w-full h-80 object-cover">
+                    <div id="modal-sensitive-overlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-4">
+                        <span class="text-xs font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-3 py-1 rounded-full mb-3">
+                            <i class="fa-solid fa-eye-slash mr-1"></i> Sensitive Content Overlay
+                        </span>
+                        <p class="text-[11px] text-slate-400 max-w-xs mb-4">Performer visual archive. Click below to unblur image.</p>
+                        <button onclick="toggleModalBlur()" id="reveal-toggle-btn" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-lg shadow-rose-950/50">
+                            18+ — Reveal Photo
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-xs text-rose-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders"></i> Encyclopedia Parameters & Metadata
+                    </h3>
+                    <div id="modal-meta-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs"></div>
+                </div>
+
+                <div>
+                    <h3 class="font-bold text-xs text-rose-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open"></i> Detailed Description & Historical Profile
+                    </h3>
+                    <p id="modal-bio" class="leading-relaxed text-slate-300 whitespace-pre-line text-xs sm:text-sm"></p>
+                </div>
+
+                <div id="modal-gallery-container" class="space-y-3 border-t border-slate-800 pt-4">
+                    <h3 class="font-bold text-xs text-slate-200 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-images text-rose-500"></i> Visual Media Gallery Archive
+                    </h3>
+                    <div id="modal-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
+                </div>
+            </div>
+
+            <div class="p-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between text-[11px] text-slate-400">
+                <span>PornWiki.org — Verified Media Registry</span>
+                <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-1.5 rounded-lg transition font-semibold">Close Entry</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-12 mt-16 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="space-y-3">
+                    <span class="bg-slate-800 text-rose-400 border border-slate-700 font-black text-base px-2.5 py-0.5 rounded tracking-wider">
+                        Porn<span class="text-slate-100 font-light">Wiki</span>
+                    </span>
+                    <p class="text-[11px] text-slate-500 leading-relaxed">
+                        An independent media encyclopedia providing biographical data, physical metrics, studio histories, and sexual health protocols.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-200 uppercase tracking-wider text-[11px] mb-3">Directory</h4>
+                    <ul class="space-y-2 text-[11px]">
+                        <li><a href="#" onclick="showSection('browse', 'Actress')" class="hover:text-rose-400">Performers</a></li>
+                        <li><a href="#" onclick="showSection('browse', 'Studio')" class="hover:text-rose-400">Studios & Networks</a></li>
+                        <li><a href="#" onclick="showSection('browse', 'Position')" class="hover:text-rose-400">Sexual Positions</a></li>
+                        <li><a href="#" onclick="showSection('browse', 'Health')" class="hover:text-emerald-400">Health & Safety</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-200 uppercase tracking-wider text-[11px] mb-3">Editorial Standards</h4>
+                    <ul class="space-y-2 text-[11px]">
+                        <li><a href="#" onclick="showPolicy('about')" class="hover:text-rose-400">About PornWiki</a></li>
+                        <li><a href="#" onclick="showPolicy('editorial')" class="hover:text-rose-400">Editorial Guidelines</a></li>
+                        <li><a href="#" onclick="showPolicy('copyright')" class="hover:text-rose-400">Copyright & DMCA</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-200 uppercase tracking-wider text-[11px] mb-3">Legal & Governance</h4>
+                    <ul class="space-y-2 text-[11px]">
+                        <li><a href="#" onclick="showPolicy('privacy')" class="hover:text-rose-400">Privacy Policy</a></li>
+                        <li><a href="#" onclick="showPolicy('terms')" class="hover:text-rose-400">Terms of Service</a></li>
+                        <li><a href="#" onclick="showSection('contact')" class="hover:text-rose-400">Submit Corrections</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-600 gap-4">
+                <p>PornWiki.org — Educational & Historical Media Database. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <span class="hover:text-slate-400 cursor-pointer" onclick="showPolicy('privacy')">Privacy Policy</span>
+                    <span class="hover:text-slate-400 cursor-pointer" onclick="showPolicy('terms')">Terms of Service</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App Script Engine -->
+    <script>
+        let database = [
+            {
+                id: "angela-white",
+                name: "Angela White",
+                category: "Actress",
+                letter: "A",
+                birthdate: "March 4, 1985",
+                activeYears: "2003 - Present",
+                nationality: "Australian",
+                height: "5'8\" (173 cm)",
+                weight: "135 lbs (61 kg)",
+                measurements: "36FF-26-38",
+                features: "Brunette / Brown Eyes",
+                tattoos: "Small Wrist Tattoo",
+                awards: "AVN Performer of Year (3x), XBIZ Hall of Fame",
+                image: "https://placehold.co/600x400/111827/f43f5e?text=Angela+White+Spotlight",
+                isSensitive: true,
+                gallery: [
+                    { url: "https://placehold.co/400x300/111827/f43f5e?text=Angela+White+Gallery+1", isSensitive: true },
+                    { url: "https://placehold.co/400x300/111827/38bdf8?text=Angela+White+Portrait", isSensitive: false }
+                ],
+                bio: "Angela White is an Australian adult entertainment performer, director, and studio executive. Born on March 4, 1985, in Sydney, Australia, she earned a Bachelor's Degree in Gender Studies from the University of Melbourne."
+            },
+            {
+                id: "brazzers-network",
+                name: "Brazzers Network",
+                category: "Studio",
+                letter: "B",
+                hq: "Montreal, Canada",
+                founded: "2005",
+                parent: "Aylo (MindGeek)",
+                activeYears: "2005 - Present",
+                nationality: "Canadian / Global",
+                awards: "XBIZ Network of the Year",
+                image: "https://placehold.co/600x400/111827/3b82f6?text=Brazzers+Network+Archive",
+                isSensitive: false,
+                gallery: [
+                    { url: "https://placehold.co/400x300/111827/3b82f6?text=Brazzers+Studio+Logo", isSensitive: false }
+                ],
+                bio: "Brazzers is a major global adult entertainment studio network established in 2005 in Montreal, Canada. Operating over 30 sub-channels, the company has produced thousands of full-length films."
+            },
+            {
+                id: "missionary-position",
+                name: "Missionary Position",
+                category: "Position",
+                letter: "M",
+                difficulty: "Beginner",
+                intimacy: "High Eye Contact & Closeness",
+                origin: "Traditional / Universal",
+                activeYears: "Universal Classic",
+                nationality: "Universal",
+                awards: "Foundational Technique",
+                image: "https://placehold.co/600x400/111827/a855f7?text=Missionary+Position",
+                isSensitive: false,
+                gallery: [
+                    { url: "https://placehold.co/400x300/111827/a855f7?text=Technical+Diagram", isSensitive: false }
+                ],
+                bio: "The missionary position is a sexual position in which one partner lies face up and facing the other partner, who is positioned on top facing down. Known for promoting maximum intimacy."
+            },
+            {
+                id: "pass-testing-protocol",
+                name: "PASS Testing Standard",
+                category: "Health",
+                letter: "P",
+                frequency: "Every 14 Days",
+                agency: "Independent Medical Laboratories",
+                activeYears: "Industry Standard",
+                nationality: "Global Standard",
+                awards: "Workplace Health Standard",
+                image: "https://placehold.co/600x400/111827/10b981?text=Sexual+Health+Guide",
+                isSensitive: false,
+                gallery: [
+                    { url: "https://placehold.co/400x300/111827/10b981?text=PASS+Medical+Standard", isSensitive: false }
+                ],
+                bio: "Performer Availability Screening Services (PASS) is the adult entertainment industry's standardized STI testing framework. Requires active performers to undergo comprehensive testing."
+            }
+        ];
+
+        let isAdminAuthenticated = false;
+        let isMainModalRevealed = false;
+
+        function announceToScreenReader(msg) {
+            document.getElementById('sr-announcer').innerText = msg;
+        }
+
+        function acceptAge() {
+            document.getElementById('age-gate').classList.add('hidden');
+            localStorage.setItem('pornwiki_age_confirmed', 'true');
+        }
+
+        function rejectAge() {
+            window.location.href = "https://www.google.com";
+        }
+
+        function checkAgeGate() {
+            if (localStorage.getItem('pornwiki_age_confirmed') === 'true') {
+                document.getElementById('age-gate').classList.add('hidden');
+            }
+        }
+
+        function showSection(sectionId, filterParam = 'all') {
+            ['home', 'browse', 'admin', 'contact', 'policy'].forEach(s => {
+                const el = document.getElementById(`section-${s}`);
+                if(el) el.classList.add('hidden');
+            });
+            document.getElementById('search-results-section').classList.add('hidden');
+
+            const target = document.getElementById(`section-${sectionId}`);
+            if(target) target.classList.remove('hidden');
+
+            if(sectionId === 'browse') {
+                setFilter(filterParam);
+            } else if(sectionId === 'admin' && isAdminAuthenticated) {
+                renderAdminEntriesTable();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileNav() {
+            document.getElementById('mobile-nav').classList.toggle('hidden');
+        }
+
+        function renderAZButtons() {
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+            const container = document.getElementById('az-buttons');
+            container.innerHTML = `<button onclick="filterByLetter('all')" class="px-2.5 py-1 bg-rose-600 text-white rounded font-bold">ALL</button>`;
+            
+            letters.forEach(letter => {
+                container.innerHTML += `
+                    <button onclick="filterByLetter('${letter}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded hover:text-white transition">
+                        ${letter}
+                    </button>
+                `;
+            });
+        }
+
+        function filterByLetter(letter) {
+            showSection('browse');
+            const filtered = letter === 'all' ? database : database.filter(item => item.name.toUpperCase().startsWith(letter));
+            document.getElementById('browse-title').innerText = letter === 'all' ? "Encyclopedia Directory" : `Alphabetical Index: '${letter}'`;
+            renderCards(filtered, 'browse-cards-grid');
+        }
+
+        function renderCards(items, containerId) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+
+            if(items.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-slate-500 bg-slate-900 border border-slate-800 rounded-2xl">
+                        <p class="text-xs">No matching encyclopedia entries found.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = items.map(item => `
+                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col justify-between group shadow-md">
+                    <div>
+                        <div class="relative overflow-hidden bg-slate-950 h-44">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300 ${item.isSensitive ? 'nsfw-blur' : ''}">
+                            <span class="absolute top-2 right-2 text-[10px] font-bold px-2 py-0.5 rounded-md ${getBadgeStyle(item.category)}">
+                                ${item.category}
+                            </span>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <h3 class="font-bold text-white text-sm group-hover:text-rose-400 transition">${item.name}</h3>
+                            <div class="text-[11px] text-slate-400 space-y-0.5">
+                                <p><span class="text-slate-500">Details:</span> ${item.activeYears || item.hq || item.difficulty || item.frequency || 'N/A'}</p>
+                                <p><span class="text-slate-500">Origin:</span> ${item.nationality || item.origin || item.agency || 'N/A'}</p>
+                            </div>
+                            <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed pt-1">${item.bio}</p>
+                        </div>
+                    </div>
+                    <div class="p-4 pt-0">
+                        <button onclick="openDetailModal('${item.id}')" class="w-full bg-slate-800 hover:bg-rose-600 hover:text-white text-slate-300 font-semibold py-2 rounded-lg text-xs transition">
+                            View Verified Entry
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getBadgeStyle(cat) {
+            switch(cat) {
+                case 'Actress': return 'bg-rose-500/20 text-rose-400 border border-rose-500/30';
+                case 'Studio': return 'bg-blue-500/20 text-blue-400 border border-blue-500/30';
+                case 'Position': return 'bg-purple-500/20 text-purple-400 border border-purple-500/30';
+                case 'Health': return 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+                default: return 'bg-slate-800 text-slate-300';
+            }
+        }
+
+        function setFilter(cat) {
+            const filtered = cat === 'all' ? database : database.filter(d => d.category === cat);
+            document.getElementById('browse-title').innerText = cat === 'all' ? "Encyclopedia Directory" : `${cat} Directory`;
+            
+            ['all', 'Actress', 'Studio', 'Position', 'Health'].forEach(c => {
+                const btn = document.getElementById(`filter-${c}`);
+                if(btn) {
+                    btn.className = c === cat ? 
+                        "px-3 py-1.5 rounded-lg bg-rose-600 text-white font-bold" : 
+                        "px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium";
+                }
+            });
+
+            renderCards(filtered, 'browse-cards-grid');
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('global-search').value.toLowerCase().trim();
+            const resultsSection = document.getElementById('search-results-section');
+            
+            if(query.length < 2) {
+                resultsSection.classList.add('hidden');
+                return;
+            }
+
+            const matches = database.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.bio.toLowerCase().includes(query) ||
+                (item.category && item.category.toLowerCase().includes(query))
+            );
+
+            document.getElementById('search-count').innerText = matches.length;
+            renderCards(matches, 'search-cards-grid');
+            resultsSection.classList.remove('hidden');
+        }
+
+        function clearSearch() {
+            document.getElementById('global-search').value = '';
+            document.getElementById('search-results-section').classList.add('hidden');
+        }
+
+        function openDetailModal(id) {
+            const item = database.find(d => d.id === id);
+            if(!item) return;
+
+            document.getElementById('modal-category').innerText = item.category;
+            document.getElementById('modal-title').innerText = item.name;
+            document.getElementById('modal-bio').innerText = item.bio;
+
+            const metaGrid = document.getElementById('modal-meta-grid');
+            let metaHtml = '';
+
+            if (item.category === 'Actress') {
+                metaHtml = `
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Birthdate</span><strong class="text-white">${item.birthdate || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Active Era</span><strong class="text-white">${item.activeYears || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Origin</span><strong class="text-white">${item.nationality || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Height</span><strong class="text-white">${item.height || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Weight</span><strong class="text-white">${item.weight || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Measurements</span><strong class="text-white">${item.measurements || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Hair / Eyes</span><strong class="text-white">${item.features || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Distinctions</span><strong class="text-rose-400">${item.awards || 'N/A'}</strong></div>
+                `;
+            } else if (item.category === 'Studio') {
+                metaHtml = `
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Headquarters</span><strong class="text-white">${item.hq || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Founded Year</span><strong class="text-white">${item.founded || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Parent Network</span><strong class="text-white">${item.parent || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Honors</span><strong class="text-blue-400">${item.awards || 'N/A'}</strong></div>
+                `;
+            } else if (item.category === 'Position') {
+                metaHtml = `
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Difficulty Level</span><strong class="text-white">${item.difficulty || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Intimacy Level</span><strong class="text-white">${item.intimacy || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Historical Origin</span><strong class="text-white">${item.origin || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Type</span><strong class="text-purple-400">Technique</strong></div>
+                `;
+            } else if (item.category === 'Health') {
+                metaHtml = `
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Testing Cycle</span><strong class="text-white">${item.frequency || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Compliance Agency</span><strong class="text-white">${item.agency || 'N/A'}</strong></div>
+                    <div><span class="text-slate-500 block text-[10px] uppercase">Standard</span><strong class="text-emerald-400">Verified Safety</strong></div>
+                `;
+            }
+            metaGrid.innerHTML = metaHtml;
+
+            const img = document.getElementById('modal-image');
+            const overlay = document.getElementById('modal-sensitive-overlay');
+            const revealBtn = document.getElementById('reveal-toggle-btn');
+            
+            img.src = item.image;
+            isMainModalRevealed = false;
+
+            if(item.isSensitive) {
+                img.classList.add('nsfw-blur');
+                overlay.classList.remove('hidden');
+                revealBtn.innerText = "18+ — Reveal Photo";
+            } else {
+                img.classList.remove('nsfw-blur');
+                overlay.classList.add('hidden');
+            }
+
+            const galleryGrid = document.getElementById('modal-gallery-grid');
+            if(item.gallery && item.gallery.length > 0) {
+                galleryGrid.innerHTML = item.gallery.map((gImg, idx) => `
+                    <div class="relative rounded-lg overflow-hidden bg-slate-950 border border-slate-800 h-32 group">
+                        <img src="${gImg.url}" id="gallery-img-${idx}" alt="Gallery photo ${idx+1}" class="w-full h-full object-cover ${gImg.isSensitive ? 'nsfw-blur' : ''}">
+                        ${gImg.isSensitive ? `
+                            <button onclick="toggleGalleryBlur(${idx})" id="gallery-btn-${idx}" class="absolute inset-0 bg-slate-950/70 hover:bg-slate-950/40 text-white font-bold text-[10px] flex items-center justify-center p-2 transition">
+                                <i class="fa-solid fa-eye mr-1"></i> Reveal Image
+                            </button>
+                        ` : ''}
+                    </div>
+                `).join('');
+            } else {
+                galleryGrid.innerHTML = `<p class="text-[11px] text-slate-500 col-span-full">No additional media items in gallery archive.</p>`;
+            }
+
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function toggleModalBlur() {
+            const img = document.getElementById('modal-image');
+            const overlay = document.getElementById('modal-sensitive-overlay');
+            const revealBtn = document.getElementById('reveal-toggle-btn');
+
+            if(!isMainModalRevealed) {
+                img.classList.remove('nsfw-blur');
+                overlay.classList.add('bg-transparent');
+                overlay.classList.remove('backdrop-blur-md');
+                overlay.querySelector('p').classList.add('hidden');
+                overlay.querySelector('span').classList.add('hidden');
+                revealBtn.innerText = "Cover Sensitive Image";
+                isMainModalRevealed = true;
+            } else {
+                img.classList.add('nsfw-blur');
+                overlay.classList.remove('bg-transparent');
+                overlay.classList.add('backdrop-blur-md');
+                overlay.querySelector('p').classList.remove('hidden');
+                overlay.querySelector('span').classList.remove('hidden');
+                revealBtn.innerText = "18+ — Reveal Photo";
+                isMainModalRevealed = false;
+            }
+        }
+
+        function toggleGalleryBlur(idx) {
+            const img = document.getElementById(`gallery-img-${idx}`);
+            const btn = document.getElementById(`gallery-btn-${idx}`);
+            if(img.classList.contains('nsfw-blur')) {
+                img.classList.remove('nsfw-blur');
+                btn.classList.add('hidden');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
+
+        function authenticateAdmin() {
+            const passcode = document.getElementById('admin-passcode').value;
+            const err = document.getElementById('auth-error');
+            
+            if(passcode === 'pornosexxnxx') {
+                isAdminAuthenticated = true;
+                document.getElementById('admin-auth-card').classList.add('hidden');
+                document.getElementById('admin-desk').classList.remove('hidden');
+                err.classList.add('hidden');
+                renderAdminEntriesTable();
+            } else {
+                err.classList.remove('hidden');
+            }
+        }
+
+        function lockAdmin() {
+            isAdminAuthenticated = false;
+            document.getElementById('admin-desk').classList.add('hidden');
+            document.getElementById('admin-auth-card').classList.remove('hidden');
+            document.getElementById('admin-passcode').value = '';
+            resetAdminForm();
+        }
+
+        function switchAdminTemplate() {
+            const cat = document.getElementById('entry-category').value;
+            document.querySelectorAll('.category-template').forEach(el => el.classList.add('hidden'));
+
+            if(cat === 'Actress') {
+                document.getElementById('template-performer').classList.remove('hidden');
+            } else if(cat === 'Studio') {
+                document.getElementById('template-studio').classList.remove('hidden');
+            } else if(cat === 'Position') {
+                document.getElementById('template-position').classList.remove('hidden');
+            } else if(cat === 'Health') {
+                document.getElementById('template-health').classList.remove('hidden');
+            }
+        }
+
+        function handlePublishEntry(e) {
+            e.preventDefault();
+            if(!isAdminAuthenticated) return;
+
+            const editId = document.getElementById('edit-entry-id').value;
+            const name = document.getElementById('entry-name').value;
+            const category = document.getElementById('entry-category').value;
+            
+            let entryData = {
+                id: editId || name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+                name: name,
+                category: category,
+                letter: name.charAt(0).toUpperCase(),
+                image: document.getElementById('entry-main-img').value,
+                isSensitive: document.getElementById('entry-main-sensitive').checked,
+                gallery: document.getElementById('entry-gallery-imgs').value.split(',').map(u => u.trim()).filter(u => u.length > 0).map(u => ({ url: u, isSensitive: document.getElementById('entry-gallery-sensitive').checked })),
+                bio: document.getElementById('entry-bio').value
+            };
+
+            if (category === 'Actress') {
+                entryData.birthdate = document.getElementById('p-birthdate').value || "N/A";
+                entryData.height = document.getElementById('p-height').value || "N/A";
+                entryData.weight = document.getElementById('p-weight').value || "N/A";
+                entryData.measurements = document.getElementById('p-measurements').value || "N/A";
+                const hair = document.getElementById('p-hair').value || "";
+                const eyes = document.getElementById('p-eyes').value || "";
+                entryData.features = `${hair} / ${eyes}`.trim();
+                entryData.tattoos = document.getElementById('p-tattoos').value || "None";
+                entryData.activeYears = document.getElementById('p-years').value || "2020 - Present";
+                entryData.nationality = document.getElementById('p-nationality').value || "Verified";
+                entryData.awards = document.getElementById('p-awards').value || "Verified Entry";
+            } else if (category === 'Studio') {
+                entryData.hq = document.getElementById('s-hq').value || "Global";
+                entryData.founded = document.getElementById('s-founded').value || "2005";
+                entryData.parent = document.getElementById('s-parent').value || "Independent";
+                entryData.activeYears = entryData.founded;
+                entryData.awards = "Studio Network";
+            } else if (category === 'Position') {
+                entryData.difficulty = document.getElementById('pos-difficulty').value || "Moderate";
+                entryData.intimacy = document.getElementById('pos-intimacy').value || "Standard";
+                entryData.origin = document.getElementById('pos-origin').value || "Traditional";
+                entryData.activeYears = "Technique";
+                entryData.awards = "Postural Standard";
+            } else if (category === 'Health') {
+                entryData.frequency = document.getElementById('h-frequency').value || "Standard";
+                entryData.agency = document.getElementById('h-agency').value || "Medical Labs";
+                entryData.activeYears = "Safety Protocol";
+                entryData.awards = "Health Standard";
+            }
+
+            if(editId) {
+                const index = database.findIndex(d => d.id === editId);
+                if(index !== -1) {
+                    database[index] = entryData;
+                    alert(`Entry "${name}" updated successfully!`);
+                }
+            } else {
+                database.unshift(entryData);
+                alert(`Entry "${name}" published successfully!`);
+            }
+            
+            resetAdminForm();
+            renderAdminEntriesTable();
+        }
+
+        function renderAdminEntriesTable() {
+            const tbody = document.getElementById('admin-entries-table-body');
+            document.getElementById('admin-entries-count').innerText = `${database.length} Entries`;
+
+            if(database.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500">No encyclopedia entries found.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = database.map(item => `
+                <tr class="hover:bg-slate-950/50 transition">
+                    <td class="p-3 font-bold text-white flex items-center gap-2">
+                        <img src="${item.image}" class="w-8 h-8 rounded object-cover ${item.isSensitive ? 'nsfw-blur' : ''}">
+                        ${item.name}
+                    </td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${getBadgeStyle(item.category)}">${item.category}</span></td>
+                    <td class="p-3 text-slate-400">${item.activeYears || item.hq || item.difficulty || item.frequency || 'N/A'}</td>
+                    <td class="p-3 text-right space-x-2">
+                        <button onclick="editEntry('${item.id}')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1 rounded text-[11px] font-semibold transition">Edit</button>
+                        <button onclick="deleteEntry('${item.id}')" class="bg-rose-950/50 hover:bg-rose-900 text-rose-400 px-3 py-1 rounded text-[11px] font-semibold transition">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function editEntry(id) {
+            const item = database.find(d => d.id === id);
+            if(!item) return;
+
+            document.getElementById('edit-entry-id').value = item.id;
+            document.getElementById('entry-name').value = item.name;
+            document.getElementById('entry-category').value = item.category;
+            switchAdminTemplate();
+
+            if(item.category === 'Actress') {
+                document.getElementById('p-birthdate').value = item.birthdate || '';
+                document.getElementById('p-height').value = item.height || '';
+                document.getElementById('p-weight').value = item.weight || '';
+                document.getElementById('p-measurements').value = item.measurements || '';
+                const feats = (item.features || '').split('/');
+                document.getElementById('p-hair').value = (feats[0] || '').trim();
+                document.getElementById('p-eyes').value = (feats[1] || '').trim();
+                document.getElementById('p-tattoos').value = item.tattoos || '';
+                document.getElementById('p-years').value = item.activeYears || '';
+                document.getElementById('p-nationality').value = item.nationality || '';
+                document.getElementById('p-awards').value = item.awards || '';
+            } else if(item.category === 'Studio') {
+                document.getElementById('s-hq').value = item.hq || '';
+                document.getElementById('s-founded').value = item.founded || '';
+                document.getElementById('s-parent').value = item.parent || '';
+            } else if(item.category === 'Position') {
+                document.getElementById('pos-difficulty').value = item.difficulty || '';
+                document.getElementById('pos-intimacy').value = item.intimacy || '';
+                document.getElementById('pos-origin').value = item.origin || '';
+            } else if(item.category === 'Health') {
+                document.getElementById('h-frequency').value = item.frequency || '';
+                document.getElementById('h-agency').value = item.agency || '';
+            }
+
+            document.getElementById('entry-main-img').value = item.image || '';
+            document.getElementById('entry-main-sensitive').checked = item.isSensitive || false;
+            document.getElementById('entry-gallery-imgs').value = (item.gallery || []).map(g => g.url).join(', ');
+            document.getElementById('entry-gallery-sensitive').checked = (item.gallery || []).length > 0 ? item.gallery[0].isSensitive : false;
+            document.getElementById('entry-bio').value = item.bio || '';
+
+            document.getElementById('admin-form-mode-label').innerText = `Editor Mode: Editing "${item.name}"`;
+            document.getElementById('admin-form-heading').innerText = `Edit Encyclopedia Entry`;
+            document.getElementById('submit-btn-text').innerText = `Save Changes to Entry`;
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetAdminForm() {
+            document.getElementById('publish-form').reset();
+            document.getElementById('edit-entry-id').value = '';
+            switchAdminTemplate();
+            document.getElementById('admin-form-mode-label').innerText = `Editor Mode: Create New Entry`;
+            document.getElementById('admin-form-heading').innerText = `Publish New Encyclopedia Entry`;
+            document.getElementById('submit-btn-text').innerText = `Publish Entry to Live Encyclopedia`;
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+        }
+
+        function deleteEntry(id) {
+            const item = database.find(d => d.id === id);
+            if(!item) return;
+
+            if(confirm(`Are you sure you want to delete "${item.name}" from the encyclopedia database?`)) {
+                database = database.filter(d => d.id !== id);
+                renderAdminEntriesTable();
+                alert(`Entry deleted successfully.`);
+            }
+        }
+
+        function updateFormSubject() {
+            const select = document.getElementById('contact-subject-select');
+            document.getElementById('form-subject-hidden').value = `PornWiki Correction: ${select.value}`;
+        }
+
+        async function handleContactSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('contact-form');
+            const btn = document.getElementById('contact-submit-btn');
+            const box = document.getElementById('contact-status-box');
+
+            btn.disabled = true;
+            btn.innerText = "Dispatching to Inbox...";
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    box.className = "p-4 rounded-xl text-xs bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 block space-y-1";
+                    box.innerHTML = `<strong class="block font-bold"><i class="fa-solid fa-check-circle mr-1"></i> Successfully Dispatched!</strong> Your correction report has been delivered straight to <code class="text-white">pornwiki.official@gmail.com</code>.`;
+                    form.reset();
+                } else {
+                    throw new Error(data.message || "Submission failed");
+                }
+            } catch (error) {
+                box.className = "p-4 rounded-xl text-xs bg-rose-500/10 border border-rose-500/30 text-rose-300 block space-y-1";
+                box.innerHTML = `<strong class="block font-bold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Error:</strong> Could not dispatch message. Please try again later.`;
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Dispatch Correction Report to Secure Inbox";
+            }
+        }
+
+        function showPolicy(type) {
+            showSection('policy');
+            const title = document.getElementById('policy-title');
+            const content = document.getElementById('policy-content');
+
+            if(type === 'privacy') {
+                title.innerText = "Comprehensive Privacy & Data Protection Policy";
+                content.innerHTML = `
+                    <div class="space-y-4">
+                        <h3 class="text-sm font-bold text-white">1. Data Minimization & Privacy Statement</h3>
+                        <p>PornWiki.org operates under strict privacy and data minimization principles. We do not sell user data, track personal identity vectors, or maintain third-party browser tracking profiles.</p>
+                    </div>
+                `;
+            } else if(type === 'terms') {
+                title.innerText = "Terms of Service & Usage Governance";
+                content.innerHTML = `
+                    <div class="space-y-4">
+                        <p>By entering PornWiki.org, you explicitly confirm that you are at least 18 years of age or the legal age of majority in your governing jurisdiction.</p>
+                    </div>
+                `;
+            } else if(type === 'copyright') {
+                title.innerText = "Copyright, DMCA & Image Removal Policy";
+                content.innerHTML = `
+                    <div class="space-y-4">
+                        <p>PornWiki.org complies fully with international copyright and media rights standards, including the Digital Millennium Copyright Act (DMCA).</p>
+                    </div>
+                `;
+            } else {
+                title.innerText = "Editorial Integrity & Neutrality Standards";
+                content.innerHTML = `
+                    <div class="space-y-4">
+                        <p>PornWiki.org maintains strict journalistic neutrality. We do not publish unverified gossip, private contact details, or non-consensual media.</p>
+                    </div>
+                `;
+            }
+        }
+
+        window.onload = function() {
+            checkAgeGate();
+            renderAZButtons();
+            renderCards(database, 'featured-grid');
+            renderCards(database, 'browse-cards-grid');
+            switchAdminTemplate();
+        };
+    </script>
+</body>
+</html>
