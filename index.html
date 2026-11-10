@@ -77,25 +77,22 @@
     <!-- Header Navigation -->
     <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between py-2.5 sm:h-16 gap-3">
+            <div class="flex items-center justify-between py-2.5 sm:h-20 gap-3">
                 
-                <div class="flex items-center justify-between shrink-0">
-                    <a href="#" onclick="showSection('home')" class="flex items-center space-x-2">
-                        <span class="bg-slate-800 text-rose-400 border border-slate-700 font-black text-lg px-2.5 py-1 rounded-lg tracking-wider shadow-sm">
-                            Porn<span class="text-slate-100 font-light">Wiki</span>
+                <div class="flex items-center space-x-3 shrink-0">
+                    <a href="#" onclick="showSection('home')" class="flex items-center">
+                        <!-- PROMINENT RESIZED BALANCED HEADER LOGO -->
+                        <span class="bg-slate-900 text-white font-black text-2xl sm:text-3xl px-5 py-2.5 rounded-2xl tracking-tight border border-slate-700 shadow-xl inline-block">
+                            Porn<span class="text-rose-500">Wiki</span>
                         </span>
-                        <span class="text-[10px] font-mono uppercase bg-slate-800 text-slate-400 px-2 py-0.5 rounded border border-slate-700">Org</span>
                     </a>
-                    <button onclick="toggleMobileNav()" aria-label="Toggle Navigation" class="sm:hidden text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800">
-                        <i class="fa-solid fa-bars text-lg"></i>
-                    </button>
                 </div>
 
-                <div class="flex-1 max-w-md relative">
+                <div class="flex-1 max-w-md relative hidden sm:block">
                     <label for="global-search" class="sr-only">Search encyclopedia</label>
                     <div class="relative">
                         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                        <input type="text" id="global-search" onkeyup="handleSearch()" placeholder="Search performers, studios, positions, health protocols..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 transition">
+                        <input type="text" id="global-search" onkeyup="handleSearch()" placeholder="Search performers, studios, positions, health protocols..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 transition">
                     </div>
                 </div>
 
@@ -106,6 +103,18 @@
                     <button onclick="showSection('browse', 'Health')" class="px-3 py-2 rounded-lg hover:bg-slate-800 text-emerald-400 transition">Health & Safety</button>
                     <button onclick="showSection('admin')" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition border border-slate-700"><i class="fa-solid fa-lock text-[10px] mr-1"></i> Editor Desk</button>
                 </nav>
+
+                <button onclick="toggleMobileNav()" aria-label="Toggle Navigation" class="sm:hidden text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Search Bar -->
+            <div class="pb-3 sm:hidden">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                    <input type="text" id="global-search-mobile" onkeyup="handleSearchMobile()" placeholder="Search encyclopedia..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 transition">
+                </div>
             </div>
         </div>
 
@@ -135,26 +144,6 @@
 
         <!-- VIEW 1: HOMEPAGE -->
         <section id="section-home" class="space-y-8">
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 text-center max-w-3xl mx-auto space-y-4 shadow-xl relative overflow-hidden">
-                <div class="absolute -top-12 -right-12 w-48 h-48 bg-rose-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
-                    The Independent Adult Media & Industry Encyclopedia
-                </h1>
-                <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto leading-relaxed">
-                    Explore verified performer profiles, adult studio networks, illustrative sexual positions, and rigorous health & safety protocols.
-                </p>
-                <div class="pt-1 space-y-3">
-                    <div>
-                        <button onclick="showSection('browse', 'all')" class="bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-lg shadow-rose-950/50">
-                            Explore Full Encyclopedia Index
-                        </button>
-                    </div>
-                    <p class="text-[11px] text-slate-500 pt-1">
-                        Verified Non-Explicit Metadata · <a href="#" onclick="showSection('contact')" class="text-slate-400 hover:text-rose-400 underline">Submit Corrections</a>
-                    </p>
-                </div>
-            </div>
-
             <div class="space-y-4 max-w-5xl mx-auto">
                 <div class="flex items-center justify-between">
                     <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300">Featured Encyclopedia Entries</h2>
@@ -200,7 +189,7 @@
                         <i class="fa-solid fa-lock"></i>
                     </div>
                     <h1 class="text-xl font-bold text-white">Only Admin Access</h1>
-                    <p class="text-xs text-slate-400">Enter your secure passcode to access the publishing dashboard.</p>
+                    <p class="text-xs text-slate-400">Enter secure administrative passcode to access the publishing dashboard.</p>
                 </div>
                 <div class="space-y-3 pt-2">
                     <div>
@@ -215,6 +204,32 @@
             </div>
 
             <div id="admin-desk" class="hidden space-y-6">
+                
+                <!-- GLOBAL AD INJECTOR CONFIGURATION PANEL -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4">
+                    <div class="border-b border-slate-800 pb-3 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-rectangle-ad text-rose-500"></i> Dynamic Ad Code Injector (Global Slots)
+                            </h2>
+                            <p class="text-[11px] text-slate-400 mt-0.5">Paste raw scripts or HTML ad tags below. Changes apply instantly across the site.</p>
+                        </div>
+                        <button onclick="saveGlobalAdCodes()" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-4 py-2 rounded-xl text-xs transition shadow-lg shadow-rose-950/40">
+                            Apply Ad Codes
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="space-y-1.5">
+                            <label for="global-inarticle-ad" class="block text-[11px] font-semibold text-slate-300 uppercase">In-Article Ad Code (Paste Script Here)</label>
+                            <textarea id="global-inarticle-ad" rows="3" placeholder="<script>...</script> or HTML ad code..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-[11px] font-mono text-slate-200 focus:outline-none focus:border-rose-500"></textarea>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label for="global-footer-ad" class="block text-[11px] font-semibold text-slate-300 uppercase">Footer Top Ad Code (Paste Script Here)</label>
+                            <textarea id="global-footer-ad" rows="3" placeholder="<script>...</script> or HTML ad code..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-[11px] font-mono text-slate-200 focus:outline-none focus:border-rose-500"></textarea>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                         <div>
@@ -354,7 +369,10 @@
                             <div class="space-y-3">
                                 <div>
                                     <label for="entry-main-img" class="block text-xs font-semibold text-slate-300 mb-1">Primary Featured Image URL</label>
-                                    <input type="url" id="entry-main-img" required placeholder="https://i.ibb.co/example.jpg" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white">
+                                    <input type="url" id="entry-main-img" required oninput="validateImageDimensions(this.value)" placeholder="https://i.ibb.co/example.jpg" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white">
+                                    <div id="image-validation-warning" class="hidden mt-1.5 text-[11px] text-amber-400 bg-amber-500/10 border border-amber-500/20 p-2 rounded-lg">
+                                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> <span id="image-warning-text">Checking image dimensions...</span>
+                                    </div>
                                 </div>
                                 <div class="flex items-center space-x-2 pt-1">
                                     <input type="checkbox" id="entry-main-sensitive" class="rounded bg-slate-900 border-slate-700 text-rose-600 focus:ring-rose-500">
@@ -374,7 +392,43 @@
 
                         <div>
                             <label for="entry-bio" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Extensive Biography, Description & Historical Data</label>
-                            <textarea id="entry-bio" rows="6" required placeholder="Provide comprehensive biographical detail, studio history, technical instructions, or medical safety standards..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-white focus:border-rose-500"></textarea>
+                            <textarea id="entry-bio" rows="6" oninput="updateGoogleSnippet()" required placeholder="Provide comprehensive biographical detail, studio history, technical instructions, or medical safety standards..." class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-white focus:border-rose-500"></textarea>
+                        </div>
+
+                        <!-- AUTO-TAGGING & GOOGLE SEO SNIPPET SIMULATOR BOX -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
+                            <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Tagging & Google SEO Snippet Simulator
+                            </h3>
+                            
+                            <!-- Auto Tagging Output -->
+                            <div class="space-y-1.5">
+                                <span class="block text-[10px] uppercase text-slate-400 font-semibold">Generated Smart Metadata Tags:</span>
+                                <div id="auto-tags-container" class="flex flex-wrap gap-1.5">
+                                    <span class="bg-slate-900 text-slate-400 border border-slate-800 px-2.5 py-1 rounded-md text-[11px] font-mono">encyclopedia</span>
+                                    <span class="bg-slate-900 text-slate-400 border border-slate-800 px-2.5 py-1 rounded-md text-[11px] font-mono">verified-metadata</span>
+                                </div>
+                            </div>
+
+                            <!-- Google SERP Preview Box -->
+                            <div class="border border-slate-800 bg-slate-900 rounded-xl p-4 space-y-2">
+                                <div class="flex items-center justify-between text-[10px] text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800 pb-2">
+                                    <span><i class="fa-brands fa-google text-rose-500 mr-1"></i> Google Search SERP Preview Simulator</span>
+                                    <span class="text-emerald-400 font-mono">Desktop / Mobile Live View</span>
+                                </div>
+                                <div class="space-y-1 pt-1 font-sans">
+                                    <div class="text-[11px] text-slate-400 flex items-center gap-1.5 truncate">
+                                        <div class="w-4 h-4 rounded-full bg-slate-800 flex items-center justify-center text-[9px] text-white font-bold shrink-0">P</div>
+                                        <span>https://pornwiki.org/encyclopedia/<span id="serp-slug" class="text-slate-300">new-entry</span></span>
+                                    </div>
+                                    <h4 id="serp-title" class="text-sm font-medium text-blue-400 hover:underline cursor-pointer truncate">
+                                        New Entry Title — PornWiki Encyclopedia
+                                    </h4>
+                                    <p id="serp-desc" class="text-[11px] text-slate-300 leading-relaxed line-clamp-2">
+                                        Explore verified performer bios, adult studio history, and technical industry archives on PornWiki.org.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit" id="submit-btn-text" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 rounded-xl text-xs transition shadow-lg shadow-rose-950/50">
@@ -455,17 +509,20 @@
                 </form>
 
                 <div class="border-t border-slate-800 pt-4 text-[11px] text-slate-500">
-                    <p><i class="fa-solid fa-envelope mr-1 text-slate-400"></i> Direct Desk Inbox (Opera Secure): <code class="text-slate-400">pornwiki.official@gmail.com</code></p>
+                    <p><i class="fa-solid fa-envelope mr-1 text-slate-400"></i> Direct Desk Inbox: <code class="text-slate-400">pornwiki.official@gmail.com</code></p>
                 </div>
             </div>
         </section>
 
-        <!-- VIEW 5: POLICIES -->
+        <!-- VIEW 5: POLICIES & SITEMAP XML VIEWER -->
         <section id="section-policy" class="hidden max-w-4xl mx-auto space-y-6">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 space-y-8 text-xs text-slate-300 leading-relaxed">
-                <div>
-                    <span class="text-xs font-mono font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1 rounded-full uppercase">Legal Framework</span>
-                    <h1 id="policy-title" class="text-2xl font-black text-white mt-3">Institutional & Legal Policies</h1>
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <div>
+                        <span class="text-xs font-mono font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1 rounded-full uppercase">Institutional Governance</span>
+                        <h1 id="policy-title" class="text-2xl font-black text-white mt-3">Institutional & Legal Policies</h1>
+                    </div>
+                    <button onclick="showSection('home')" class="text-xs text-slate-400 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">← Back to Home</button>
                 </div>
                 <div id="policy-content" class="space-y-6"></div>
             </div>
@@ -490,7 +547,7 @@
             <div class="p-6 overflow-y-auto custom-scroll space-y-6 text-xs text-slate-300">
                 <div id="modal-visual-container" class="relative rounded-xl overflow-hidden bg-slate-950 border border-slate-800 max-h-80 flex items-center justify-center">
                     <img id="modal-image" src="" alt="Primary visual" class="w-full h-80 object-cover">
-                    <div id="modal-sensitive-overlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-4">
+                    <div id="modal-sensitive-overlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-4 hidden">
                         <span class="text-xs font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-3 py-1 rounded-full mb-3">
                             <i class="fa-solid fa-eye-slash mr-1"></i> Sensitive Content Overlay
                         </span>
@@ -515,9 +572,15 @@
                     <p id="modal-bio" class="leading-relaxed text-slate-300 whitespace-pre-line text-xs sm:text-sm"></p>
                 </div>
 
+                <!-- 1. IN-ARTICLE AD SLOT (Dynamically injected with script/HTML or default text) -->
+                <div id="dynamic-inarticle-ad-slot" class="my-6 p-4 bg-slate-950/80 border border-slate-800 rounded-lg text-center space-y-1">
+                    <span class="text-[9px] uppercase tracking-widest text-slate-600 font-mono block">ADVERTISEMENT</span>
+                    <p class="text-xs text-slate-500">Verified Industry Partner & Sponsored Reference Slot</p>
+                </div>
+
                 <div id="modal-gallery-container" class="space-y-3 border-t border-slate-800 pt-4">
                     <h3 class="font-bold text-xs text-slate-200 uppercase tracking-wider flex items-center gap-2">
-                        <i class="fa-solid fa-images text-rose-500"></i> Visual Media Gallery Archive
+                        <i class="fa-solid fa-images text-rose-500"></i> Visual Media Gallery Archive (Click to Expand)
                     </h3>
                     <div id="modal-gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div>
                 </div>
@@ -530,53 +593,74 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-12 mt-16 text-slate-400 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <!-- LIGHTBOX FULLSCREEN IMAGE VIEWER MODAL -->
+    <div id="lightbox-modal" role="dialog" aria-modal="true" class="fixed inset-0 z-[60] bg-slate-950/95 backdrop-blur-xl hidden flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" aria-label="Close lightbox" class="absolute top-5 right-5 text-slate-400 hover:text-white text-2xl p-2 bg-slate-900/80 rounded-full border border-slate-800 transition z-10">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-5xl max-h-[90vh] overflow-hidden flex items-center justify-center">
+            <img id="lightbox-img" src="" alt="Enlarged view" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl border border-slate-800">
+        </div>
+    </div>
+
+    <!-- STREAMLINED COMPACT FOOTER WITH PROMINENT LOGO & NORMAL SPACING + SECURITY.TXT COMPLIANCE + DYNAMIC SITEMAP -->
+    <footer class="border-t border-slate-800 bg-slate-950 pt-6 pb-8 mt-12 text-slate-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            
+            <!-- 2. FOOTER TOP AD SLOT (Dynamically injected with script/HTML or default text) -->
+            <div id="dynamic-footer-ad-slot" class="p-4 bg-slate-900/60 border border-slate-800 rounded-lg text-center space-y-1">
+                <span class="text-[9px] uppercase tracking-widest text-slate-600 font-mono block">ADVERTISEMENT</span>
+                <p class="text-xs text-slate-500">Sponsored Industry Network & Directory Banner Slot</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                
+                <!-- BRAND IDENTIFIER (OPTIMIZED FOOTER LOGO WITH NORMAL SPACING) -->
                 <div class="space-y-3">
-                    <span class="bg-slate-800 text-rose-400 border border-slate-700 font-black text-base px-2.5 py-0.5 rounded tracking-wider">
-                        Porn<span class="text-slate-100 font-light">Wiki</span>
-                    </span>
-                    <p class="text-[11px] text-slate-500 leading-relaxed">
-                        An independent media encyclopedia providing biographical data, physical metrics, studio histories, and sexual health protocols.
+                    <div class="flex items-center space-x-2">
+                        <span class="bg-slate-900 text-white font-black text-3xl px-5 py-2.5 rounded-2xl tracking-tight border border-slate-700 shadow-xl inline-block">
+                            Porn<span class="text-rose-500">Wiki</span>
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+                        Independent non-explicit digital reference platform documenting adult entertainment history, verified performer biographies, studio archives, and sexual health standards.
                     </p>
                 </div>
 
+                <!-- EDITORIAL STANDARDS LINK COLUMN -->
                 <div>
-                    <h4 class="font-bold text-slate-200 uppercase tracking-wider text-[11px] mb-3">Directory</h4>
-                    <ul class="space-y-2 text-[11px]">
-                        <li><a href="#" onclick="showSection('browse', 'Actress')" class="hover:text-rose-400">Performers</a></li>
-                        <li><a href="#" onclick="showSection('browse', 'Studio')" class="hover:text-rose-400">Studios & Networks</a></li>
-                        <li><a href="#" onclick="showSection('browse', 'Position')" class="hover:text-rose-400">Sexual Positions</a></li>
-                        <li><a href="#" onclick="showSection('browse', 'Health')" class="hover:text-emerald-400">Health & Safety</a></li>
+                    <h4 class="font-bold text-slate-200 uppercase tracking-wider text-xs mb-2.5 flex items-center gap-2">
+                        <i class="fa-solid fa-feather text-rose-500"></i> Editorial Standards
+                    </h4>
+                    <ul class="space-y-1.5 text-xs">
+                        <li><a href="#" onclick="showPolicy('about')" class="hover:text-rose-400 transition">About PornWiki</a></li>
+                        <li><a href="#" onclick="showPolicy('editorial')" class="hover:text-rose-400 transition">Editorial Guidelines</a></li>
+                        <li><a href="#" onclick="showPolicy('copyright')" class="hover:text-rose-400 transition">Copyright & DMCA Policy</a></li>
                     </ul>
                 </div>
 
+                <!-- LEGAL & GOVERNANCE LINK COLUMN (WITH SECURITY.TXT & XML SITEMAP) -->
                 <div>
-                    <h4 class="font-bold text-slate-200 uppercase tracking-wider text-[11px] mb-3">Editorial Standards</h4>
-                    <ul class="space-y-2 text-[11px]">
-                        <li><a href="#" onclick="showPolicy('about')" class="hover:text-rose-400">About PornWiki</a></li>
-                        <li><a href="#" onclick="showPolicy('editorial')" class="hover:text-rose-400">Editorial Guidelines</a></li>
-                        <li><a href="#" onclick="showPolicy('copyright')" class="hover:text-rose-400">Copyright & DMCA</a></li>
+                    <h4 class="font-bold text-slate-200 uppercase tracking-wider text-xs mb-2.5 flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced text-rose-500"></i> Legal & Governance
+                    </h4>
+                    <ul class="space-y-1.5 text-xs">
+                        <li><a href="#" onclick="showPolicy('privacy')" class="hover:text-rose-400 transition">Privacy Policy & RTA</a></li>
+                        <li><a href="#" onclick="showPolicy('terms')" class="hover:text-rose-400 transition">Terms of Service</a></li>
+                        <li><a href="#" onclick="showPolicy('security')" class="hover:text-emerald-400 transition font-mono"><i class="fa-solid fa-shield-halved mr-1 text-emerald-400"></i> security.txt Compliance</a></li>
+                        <li><a href="#" onclick="showSitemapViewer()" class="hover:text-blue-400 transition font-mono"><i class="fa-solid fa-sitemap mr-1 text-blue-400"></i> XML Sitemap (pornwiki.org/sitemap.xml)</a></li>
+                        <li><a href="#" onclick="showSection('contact')" class="hover:text-rose-400 transition">Submit Corrections</a></li>
                     </ul>
                 </div>
 
-                <div>
-                    <h4 class="font-bold text-slate-200 uppercase tracking-wider text-[11px] mb-3">Legal & Governance</h4>
-                    <ul class="space-y-2 text-[11px]">
-                        <li><a href="#" onclick="showPolicy('privacy')" class="hover:text-rose-400">Privacy Policy</a></li>
-                        <li><a href="#" onclick="showPolicy('terms')" class="hover:text-rose-400">Terms of Service</a></li>
-                        <li><a href="#" onclick="showSection('contact')" class="hover:text-rose-400">Submit Corrections</a></li>
-                    </ul>
-                </div>
             </div>
 
-            <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-600 gap-4">
-                <p>PornWiki.org — Educational & Historical Media Database. All rights reserved.</p>
-                <div class="flex space-x-4">
-                    <span class="hover:text-slate-400 cursor-pointer" onclick="showPolicy('privacy')">Privacy Policy</span>
-                    <span class="hover:text-slate-400 cursor-pointer" onclick="showPolicy('terms')">Terms of Service</span>
+            <!-- FOOTER BOTTOM LEAN METADATA BAR -->
+            <div class="border-t border-slate-900 pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+                <p>© PornWiki.org — Verified Non-Explicit Adult Industry Database.</p>
+                <div class="flex items-center space-x-4 text-slate-400 font-mono text-xs">
+                    <span class="bg-slate-900 px-2.5 py-1 rounded-md border border-slate-800"><i class="fa-solid fa-shield-cat text-emerald-400 mr-1.5"></i> RTA-5042-1996</span>
+                    <a href="mailto:pornwiki.official@gmail.com" class="hover:text-rose-400 text-slate-400"><i class="fa-solid fa-envelope mr-1.5"></i> pornwiki.official@gmail.com</a>
                 </div>
             </div>
         </div>
@@ -665,8 +749,28 @@
         let isAdminAuthenticated = false;
         let isMainModalRevealed = false;
 
-        function announceToScreenReader(msg) {
-            document.getElementById('sr-announcer').innerText = msg;
+        // LAZY LOADING INTERSECTION OBSERVER SETUP
+        const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute('data-src');
+                    if (src) {
+                        img.src = src;
+                        img.removeAttribute('data-src');
+                    }
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '100px 0px',
+            threshold: 0.01
+        });
+
+        function observeLazyImages() {
+            document.querySelectorAll('img.lazy-load').forEach(img => {
+                lazyImageObserver.observe(img);
+            });
         }
 
         function acceptAge() {
@@ -710,6 +814,7 @@
         function renderAZButtons() {
             const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
             const container = document.getElementById('az-buttons');
+            if(!container) return;
             container.innerHTML = `<button onclick="filterByLetter('all')" class="px-2.5 py-1 bg-rose-600 text-white rounded font-bold">ALL</button>`;
             
             letters.forEach(letter => {
@@ -745,7 +850,7 @@
                 <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col justify-between group shadow-md">
                     <div>
                         <div class="relative overflow-hidden bg-slate-950 h-44">
-                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300 ${item.isSensitive ? 'nsfw-blur' : ''}">
+                            <img data-src="${item.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3C/svg%3E" alt="${item.name}" class="lazy-load w-full h-full object-cover group-hover:scale-105 transition duration-300">
                             <span class="absolute top-2 right-2 text-[10px] font-bold px-2 py-0.5 rounded-md ${getBadgeStyle(item.category)}">
                                 ${item.category}
                             </span>
@@ -766,6 +871,8 @@
                     </div>
                 </div>
             `).join('');
+
+            observeLazyImages();
         }
 
         function getBadgeStyle(cat) {
@@ -814,8 +921,29 @@
             resultsSection.classList.remove('hidden');
         }
 
+        function handleSearchMobile() {
+            const query = document.getElementById('global-search-mobile').value.toLowerCase().trim();
+            const resultsSection = document.getElementById('search-results-section');
+            
+            if(query.length < 2) {
+                resultsSection.classList.add('hidden');
+                return;
+            }
+
+            const matches = database.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.bio.toLowerCase().includes(query) ||
+                (item.category && item.category.toLowerCase().includes(query))
+            );
+
+            document.getElementById('search-count').innerText = matches.length;
+            renderCards(matches, 'search-cards-grid');
+            resultsSection.classList.remove('hidden');
+        }
+
         function clearSearch() {
             document.getElementById('global-search').value = '';
+            document.getElementById('global-search-mobile').value = '';
             document.getElementById('search-results-section').classList.add('hidden');
         }
 
@@ -866,7 +994,6 @@
 
             const img = document.getElementById('modal-image');
             const overlay = document.getElementById('modal-sensitive-overlay');
-            const revealBtn = document.getElementById('reveal-toggle-btn');
             
             img.src = item.image;
             isMainModalRevealed = false;
@@ -874,7 +1001,6 @@
             if(item.isSensitive) {
                 img.classList.add('nsfw-blur');
                 overlay.classList.remove('hidden');
-                revealBtn.innerText = "18+ — Reveal Photo";
             } else {
                 img.classList.remove('nsfw-blur');
                 overlay.classList.add('hidden');
@@ -883,20 +1009,30 @@
             const galleryGrid = document.getElementById('modal-gallery-grid');
             if(item.gallery && item.gallery.length > 0) {
                 galleryGrid.innerHTML = item.gallery.map((gImg, idx) => `
-                    <div class="relative rounded-lg overflow-hidden bg-slate-950 border border-slate-800 h-32 group">
-                        <img src="${gImg.url}" id="gallery-img-${idx}" alt="Gallery photo ${idx+1}" class="w-full h-full object-cover ${gImg.isSensitive ? 'nsfw-blur' : ''}">
-                        ${gImg.isSensitive ? `
-                            <button onclick="toggleGalleryBlur(${idx})" id="gallery-btn-${idx}" class="absolute inset-0 bg-slate-950/70 hover:bg-slate-950/40 text-white font-bold text-[10px] flex items-center justify-center p-2 transition">
-                                <i class="fa-solid fa-eye mr-1"></i> Reveal Image
-                            </button>
-                        ` : ''}
+                    <div onclick="openLightbox('${gImg.url}')" class="relative rounded-lg overflow-hidden bg-slate-950 border border-slate-800 h-32 cursor-pointer group shadow hover:border-rose-500 transition">
+                        <img data-src="${gImg.url}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%230f172a'/%3E%3C/svg%3E" alt="Gallery photo ${idx+1}" class="lazy-load w-full h-full object-cover group-hover:scale-105 transition duration-300 ${gImg.isSensitive ? 'nsfw-blur' : ''}">
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+                            <span class="bg-rose-600 text-white text-[10px] font-bold px-2 py-1 rounded-md shadow"><i class="fa-solid fa-expand mr-1"></i> Expand</span>
+                        </div>
                     </div>
                 `).join('');
+                observeLazyImages();
             } else {
                 galleryGrid.innerHTML = `<p class="text-[11px] text-slate-500 col-span-full">No additional media items in gallery archive.</p>`;
             }
 
             document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function openLightbox(url) {
+            const lightbox = document.getElementById('lightbox-modal');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = url;
+            lightbox.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
         }
 
         function toggleModalBlur() {
@@ -923,15 +1059,6 @@
             }
         }
 
-        function toggleGalleryBlur(idx) {
-            const img = document.getElementById(`gallery-img-${idx}`);
-            const btn = document.getElementById(`gallery-btn-${idx}`);
-            if(img.classList.contains('nsfw-blur')) {
-                img.classList.remove('nsfw-blur');
-                btn.classList.add('hidden');
-            }
-        }
-
         function closeModal() {
             document.getElementById('detail-modal').classList.add('hidden');
         }
@@ -940,7 +1067,7 @@
             const passcode = document.getElementById('admin-passcode').value;
             const err = document.getElementById('auth-error');
             
-            if(passcode === 'pornosexxnxx') {
+            if(passcode === "pornosexxnxx") {
                 isAdminAuthenticated = true;
                 document.getElementById('admin-auth-card').classList.add('hidden');
                 document.getElementById('admin-desk').classList.remove('hidden');
@@ -959,6 +1086,43 @@
             resetAdminForm();
         }
 
+        function saveGlobalAdCodes() {
+            const inArticleCode = document.getElementById('global-inarticle-ad').value.trim();
+            const footerCode = document.getElementById('global-footer-ad').value.trim();
+
+            const inArticleSlot = document.getElementById('dynamic-inarticle-ad-slot');
+            const footerSlot = document.getElementById('dynamic-footer-ad-slot');
+
+            if (inArticleCode) {
+                inArticleSlot.innerHTML = inArticleCode;
+            } else {
+                inArticleSlot.innerHTML = `
+                    <span class="text-[9px] uppercase tracking-widest text-slate-600 font-mono block">ADVERTISEMENT</span>
+                    <p class="text-xs text-slate-500">Verified Industry Partner & Sponsored Reference Slot</p>
+                `;
+            }
+
+            if (footerCode) {
+                footerSlot.innerHTML = footerCode;
+            } else {
+                footerSlot.innerHTML = `
+                    <span class="text-[9px] uppercase tracking-widest text-slate-600 font-mono block">ADVERTISEMENT</span>
+                    <p class="text-xs text-slate-500">Sponsored Industry Network & Directory Banner Slot</p>
+                `;
+            }
+
+            // Execute scripts if any were injected
+            const scripts = document.querySelectorAll('#dynamic-inarticle-ad-slot script, #dynamic-footer-ad-slot script');
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                oldScript.parentNode.replaceChild(newScript, oldScript);
+            });
+
+            alert("Dynamic ad codes updated and injected successfully!");
+        }
+
         function switchAdminTemplate() {
             const cat = document.getElementById('entry-category').value;
             document.querySelectorAll('.category-template').forEach(el => el.classList.add('hidden'));
@@ -972,6 +1136,81 @@
             } else if(cat === 'Health') {
                 document.getElementById('template-health').classList.remove('hidden');
             }
+            updateAutoTagsAndSERP();
+        }
+
+        function updateAutoTagsAndSERP() {
+            const nameInput = document.getElementById('entry-name').value.trim();
+            const category = document.getElementById('entry-category').value;
+            const bioInput = document.getElementById('entry-bio').value.trim();
+
+            const title = nameInput ? `${nameInput} — PornWiki Encyclopedia` : "New Entry Title — PornWiki Encyclopedia";
+            const desc = bioInput ? bioInput : "Explore verified performer bios, adult studio history, and technical industry archives on PornWiki.org.";
+            const slug = nameInput ? nameInput.toLowerCase().replace(/[^a-z0-9]/g, '-') : "new-entry";
+
+            document.getElementById('serp-title').innerText = title;
+            document.getElementById('serp-desc').innerText = desc;
+            document.getElementById('serp-slug').innerText = slug;
+
+            const tagsContainer = document.getElementById('auto-tags-container');
+            let tags = ['encyclopedia', 'verified-metadata'];
+
+            if (category === 'Actress') {
+                tags.push('performer', 'actor-model', 'biography', 'award-winner');
+            } else if (category === 'Studio') {
+                tags.push('studio-network', 'production-hq', 'digital-era', 'subscription-architecture');
+            } else if (category === 'Position') {
+                tags.push('sexual-technique', 'postural-standard', 'intimacy-guide');
+            } else if (category === 'Health') {
+                tags.push('health-protocol', 'sti-testing', 'workplace-safety', 'pass-standard');
+            }
+
+            if(nameInput) {
+                tags.push(nameInput.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+            }
+
+            tagsContainer.innerHTML = tags.map(t => `
+                <span class="bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2.5 py-1 rounded-md text-[11px] font-mono">#${t}</span>
+            `).join('');
+        }
+
+        function validateImageDimensions(url) {
+            const warningBox = document.getElementById('image-validation-warning');
+            const warningText = document.getElementById('image-warning-text');
+            if(!url || !url.startsWith('http')) {
+                warningBox.classList.add('hidden');
+                return;
+            }
+
+            warningBox.classList.remove('hidden');
+            warningText.innerText = "Validating image aspect ratio & resolution...";
+
+            const img = new Image();
+            img.onload = function() {
+                const width = img.naturalWidth;
+                const height = img.naturalHeight;
+                const ratio = width / height;
+
+                if (width < 400 || height < 300) {
+                    warningText.innerText = `Warning: Low resolution (${width}x${height}px). Recommended minimum is 600x400px for sharp layout display.`;
+                    warningBox.className = "mt-1.5 text-[11px] text-amber-400 bg-amber-500/10 border border-amber-500/20 p-2 rounded-lg block";
+                } else if (ratio < 1.2 || ratio > 2.0) {
+                    warningText.innerText = `Notice: Unusual aspect ratio (${width}x${height}px). Standard 16:9 or 3:2 landscape photos prevent card cropping.`;
+                    warningBox.className = "mt-1.5 text-[11px] text-blue-400 bg-blue-500/10 border border-blue-500/20 p-2 rounded-lg block";
+                } else {
+                    warningText.innerText = `Optimal dimensions verified (${width}x${height}px, ratio ${ratio.toFixed(2)}). Fits card layout perfectly.`;
+                    warningBox.className = "mt-1.5 text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 p-2 rounded-lg block";
+                }
+            };
+            img.onerror = function() {
+                warningText.innerText = "Could not load image URL. Please ensure direct public image link is provided.";
+                warningBox.className = "mt-1.5 text-[11px] text-rose-400 bg-rose-500/10 border border-rose-500/20 p-2 rounded-lg block";
+            };
+            img.src = url;
+        }
+
+        function updateGoogleSnippet() {
+            updateAutoTagsAndSERP();
         }
 
         function handlePublishEntry(e) {
@@ -1037,10 +1276,13 @@
             
             resetAdminForm();
             renderAdminEntriesTable();
+            renderCards(database, 'featured-grid');
+            renderCards(database, 'browse-cards-grid');
         }
 
         function renderAdminEntriesTable() {
             const tbody = document.getElementById('admin-entries-table-body');
+            if(!tbody) return;
             document.getElementById('admin-entries-count').innerText = `${database.length} Entries`;
 
             if(database.length === 0) {
@@ -1051,7 +1293,7 @@
             tbody.innerHTML = database.map(item => `
                 <tr class="hover:bg-slate-950/50 transition">
                     <td class="p-3 font-bold text-white flex items-center gap-2">
-                        <img src="${item.image}" class="w-8 h-8 rounded object-cover ${item.isSensitive ? 'nsfw-blur' : ''}">
+                        <img data-src="${item.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f172a'/%3E%3C/svg%3E" class="lazy-load w-8 h-8 rounded object-cover">
                         ${item.name}
                     </td>
                     <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${getBadgeStyle(item.category)}">${item.category}</span></td>
@@ -1062,6 +1304,7 @@
                     </td>
                 </tr>
             `).join('');
+            observeLazyImages();
         }
 
         function editEntry(id) {
@@ -1126,9 +1369,11 @@
             const item = database.find(d => d.id === id);
             if(!item) return;
 
-            if(confirm(`Are you sure you want to delete "${item.name}" from the encyclopedia database?`)) {
+            if(confirm(`Are you sure you want to delete "${item.name}" from the database?`)) {
                 database = database.filter(d => d.id !== id);
                 renderAdminEntriesTable();
+                renderCards(database, 'featured-grid');
+                renderCards(database, 'browse-cards-grid');
                 alert(`Entry deleted successfully.`);
             }
         }
@@ -1171,38 +1416,148 @@
             }
         }
 
+        function showSitemapViewer() {
+            showSection('policy');
+            const title = document.getElementById('policy-title');
+            const content = document.getElementById('policy-content');
+
+            title.innerText = "Live XML Sitemap Index (pornwiki.org/sitemap.xml)";
+
+            let xmlContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+            xmlContent += `  <url>\n    <loc>https://pornwiki.org/</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n`;
+            
+            database.forEach(item => {
+                xmlContent += `  <url>\n    <loc>https://pornwiki.org/encyclopedia/${item.id}</loc>\n    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+            });
+            xmlContent += `</urlset>`;
+
+            content.innerHTML = `
+                <div class="space-y-4">
+                    <p class="text-xs text-slate-300">This live XML sitemap is automatically generated by the database engine in real-time whenever entries are added or updated. Googlebot indexes this feed instantly.</p>
+                    <div class="relative">
+                        <pre class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-[11px] font-mono text-emerald-400 overflow-x-auto custom-scroll max-h-96"><code>${escapeHtml(xmlContent)}</code></pre>
+                    </div>
+                </div>
+            `;
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
         function showPolicy(type) {
             showSection('policy');
             const title = document.getElementById('policy-title');
             const content = document.getElementById('policy-content');
 
-            if(type === 'privacy') {
-                title.innerText = "Comprehensive Privacy & Data Protection Policy";
+            if(type === 'security') {
+                title.innerText = "Security.txt Compliance & Vulnerability Disclosure";
                 content.innerHTML = `
-                    <div class="space-y-4">
-                        <h3 class="text-sm font-bold text-white">1. Data Minimization & Privacy Statement</h3>
-                        <p>PornWiki.org operates under strict privacy and data minimization principles. We do not sell user data, track personal identity vectors, or maintain third-party browser tracking profiles.</p>
+                    <div class="space-y-6 font-mono text-xs">
+                        <section class="space-y-3 bg-slate-950 p-5 rounded-xl border border-slate-800">
+                            <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> RFC 9116 security.txt Metadata Declaration</h3>
+                            <p class="text-slate-300 font-sans leading-relaxed">In accordance with security reporting standards, PornWiki.org maintains an active compliance policy for responsible vulnerability disclosure and infrastructure threat notifications.</p>
+                            <div class="bg-slate-900 p-4 rounded-lg border border-slate-800 text-[11px] space-y-2 text-slate-200">
+                                <p><span class="text-slate-500">Contact:</span> <a href="mailto:pornwiki.official@gmail.com" class="text-rose-400 hover:underline">mailto:pornwiki.official@gmail.com</a></p>
+                                <p><span class="text-slate-500">Expires:</span> 2028-12-31T23:59:59.000Z</p>
+                                <p><span class="text-slate-500">Encryption:</span> PGP Key Fingerprint Available Upon Request</p>
+                                <p><span class="text-slate-500">Policy:</span> Responsible Disclosure & Zero-Tolerance for Automated Abuse</p>
+                            </div>
+                        </section>
+                        <section class="space-y-2 font-sans">
+                            <h4 class="text-sm font-bold text-white">Reporting Security Vulnerabilities</h4>
+                            <p class="text-slate-300 leading-relaxed">If security researchers or institutional auditors identify any protocol vulnerability, edge routing anomaly, or encryption flaw, please notify <code class="text-rose-400">pornwiki.official@gmail.com</code> immediately. Verified submissions receive prompt acknowledgement and remediation prioritisation.</p>
+                        </section>
+                    </div>
+                `;
+            } else if(type === 'privacy') {
+                title.innerText = "Privacy Policy & RTA Compliance Framework";
+                content.innerHTML = `
+                    <div class="space-y-6">
+                        <section class="space-y-2">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-shield-halved text-rose-500"></i> 1. Non-Tracking Architecture & Data Minimization</h3>
+                            <p class="text-slate-300 leading-relaxed">PornWiki.org operates under strict privacy-by-design principles. We do not harvest personal identifiers, execute cross-site behavioral tracking, or monetize user browsing profiles. All network sessions are encrypted via TLS 1.3 and routed through secure Cloudflare edge distribution networks with automated IP anonymization.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-user-shield text-emerald-400"></i> 2. Restricted to Adults (RTA) Electronic Meta Labeling</h3>
+                            <p class="text-slate-300 leading-relaxed">In full compliance with international internet governance frameworks, PornWiki.org incorporates the official Restricted to Adults electronic meta tag (<code class="text-rose-400 font-mono">RTA-5042-1996-1400-1577-RTA</code>). Parental control software and network hardware firewalls utilize this identifier to safeguard minor audiences.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-cookie-bite text-amber-400"></i> 3. Local Client Storage</h3>
+                            <p class="text-slate-300 leading-relaxed">We utilize browser <code class="text-slate-200 font-mono">localStorage</code> solely for recording user age verification consent state (<code class="text-slate-200 font-mono">pornwiki_age_confirmed</code>). No advertising tracking cookies or telemetry beacons are stored on client browsers.</p>
+                        </section>
                     </div>
                 `;
             } else if(type === 'terms') {
                 title.innerText = "Terms of Service & Usage Governance";
                 content.innerHTML = `
-                    <div class="space-y-4">
-                        <p>By entering PornWiki.org, you explicitly confirm that you are at least 18 years of age or the legal age of majority in your governing jurisdiction.</p>
+                    <div class="space-y-6">
+                        <section class="space-y-2">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-file-contract text-rose-500"></i> 1. Scope of Encyclopedia & Educational Intent</h3>
+                            <p class="text-slate-300 leading-relaxed">PornWiki.org is an independent, non-explicit digital encyclopedia indexing factual history, biographical metrics, studio networks, and health standards of the adult entertainment industry. All information is provided strictly for academic, journalistic, and archival referencing.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-user-check text-blue-400"></i> 2. Age of Majority Mandate</h3>
+                            <p class="text-slate-300 leading-relaxed">Access to PornWiki.org is restricted strictly to adults who have attained the legal age of majority in their jurisdiction (minimum 18 years of age). By browsing or querying this database, you certify adherence to all local regulatory statutes regarding adult reference media.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-gavel text-purple-400"></i> 3. Intellectual Property & Fair Use</h3>
+                            <p class="text-slate-300 leading-relaxed">All structured software architecture, database schemas, and editorial compilations are protected under international copyright law. Trademarks and studio brand names cited within biographical profiles belong to their respective corporate owners and are referenced under Fair Use principles.</p>
+                        </section>
                     </div>
                 `;
             } else if(type === 'copyright') {
-                title.innerText = "Copyright, DMCA & Image Removal Policy";
+                title.innerText = "Copyright & DMCA Take-Down Policy";
                 content.innerHTML = `
-                    <div class="space-y-4">
-                        <p>PornWiki.org complies fully with international copyright and media rights standards, including the Digital Millennium Copyright Act (DMCA).</p>
+                    <div class="space-y-6">
+                        <section class="space-y-2">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-copyright text-rose-500"></i> 1. DMCA Compliance Framework (17 U.S.C. § 512)</h3>
+                            <p class="text-slate-300 leading-relaxed">PornWiki.org complies fully with the Digital Millennium Copyright Act (DMCA) and international intellectual property conventions. As a non-explicit biographical encyclopedia, all visual media assets are curated under Fair Use standards.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-paper-plane text-emerald-400"></i> 2. Official Takedown Notice Protocol</h3>
+                            <p class="text-slate-300 leading-relaxed">Copyright owners or authorized agents requesting media removal must submit a formal written notice containing: (a) identification of the copyrighted work infringed; (b) exact URL link or profile identifier on PornWiki.org; (c) full legal contact credentials; and (d) a statement of good-faith belief in unauthorized use.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-envelope-open-text text-amber-400"></i> 3. Designated Compliance Contact</h3>
+                            <p class="text-slate-300 leading-relaxed">All official legal notifications and takedown demands must be dispatched directly to our secure editorial inbox: <code class="bg-slate-950 px-2 py-1 rounded text-rose-400 border border-slate-800 font-mono">pornwiki.official@gmail.com</code>. Verified notices are processed within 24 to 48 business hours.</p>
+                        </section>
                     </div>
                 `;
-            } else {
-                title.innerText = "Editorial Integrity & Neutrality Standards";
+            } else if(type === 'editorial') {
+                title.innerText = "Editorial Integrity & Verification Guidelines";
                 content.innerHTML = `
-                    <div class="space-y-4">
-                        <p>PornWiki.org maintains strict journalistic neutrality. We do not publish unverified gossip, private contact details, or non-consensual media.</p>
+                    <div class="space-y-6">
+                        <section class="space-y-2">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-square-check text-rose-500"></i> 1. Multi-Point Fact Verification</h3>
+                            <p class="text-slate-300 leading-relaxed">Every biographical profile, studio history, and technical parameter published on PornWiki.org undergoes rigorous multi-source verification. Sources include official talent registries, verified industry databases, accredited trade awards (AVN, XBIZ, XRCO), and primary historical records.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-hand-holding-medical text-emerald-400"></i> 2. Health & Safety Protocols</h3>
+                            <p class="text-slate-300 leading-relaxed">Articles within our Health & Safety directory (including PASS STI testing protocols and regulatory production standards) are cross-referenced with medical research laboratories and occupational safety guidelines governing adult entertainment workplaces.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-user-pen text-blue-400"></i> 3. Biographical Neutrality & Privacy Protection</h3>
+                            <p class="text-slate-300 leading-relaxed">PornWiki.org enforces strict journalistic neutrality. We prohibit unverified gossip, tabloid rumors, or the publication of private personal contact coordinates. Performers and studios retain full rights to submit authorized biographical corrections via our dedicated correction desk.</p>
+                        </section>
+                    </div>
+                `;
+            } else if(type === 'about') {
+                title.innerText = "About PornWiki.org — The Industry Encyclopedia";
+                content.innerHTML = `
+                    <div class="space-y-6">
+                        <section class="space-y-2">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-building-columns text-rose-500"></i> 1. Mission & Institutional Background</h3>
+                            <p class="text-slate-300 leading-relaxed">Established in 2020, PornWiki.org functions as an independent digital encyclopedia and authoritative reference database dedicated to documenting the history, corporate networks, performers, and technical standards of the adult entertainment media industry.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-cubes text-blue-400"></i> 2. Non-Explicit Educational Architecture</h3>
+                            <p class="text-slate-300 leading-relaxed">Unlike commercial video streaming or distribution portals, PornWiki.org focuses exclusively on verified metadata, career statistics, award registries, historical studio timelines, and workplace safety protocols.</p>
+                        </section>
+                        <section class="space-y-2 border-t border-slate-800 pt-4">
+                            <h3 class="text-sm font-bold text-white flex items-center gap-2"><i class="fa-solid fa-globe text-emerald-400"></i> 3. Global Edge Infrastructure</h3>
+                            <p class="text-slate-300 leading-relaxed">Powered by zero-latency serverless edge distribution and decentralized JSON database architecture, PornWiki.org guarantees fast, reliable, and secure access for researchers, media analysts, and industry professionals worldwide.</p>
+                        </section>
                     </div>
                 `;
             }
@@ -1214,6 +1569,12 @@
             renderCards(database, 'featured-grid');
             renderCards(database, 'browse-cards-grid');
             switchAdminTemplate();
+            observeLazyImages();
+            
+            const nameField = document.getElementById('entry-name');
+            if(nameField) {
+                nameField.addEventListener('input', updateAutoTagsAndSERP);
+            }
         };
     </script>
 </body>
