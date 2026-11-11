@@ -81,7 +81,6 @@
                 
                 <div class="flex items-center space-x-3 shrink-0">
                     <a href="#" onclick="showSection('home')" class="flex items-center">
-                        <!-- PROMINENT RESIZED BALANCED HEADER LOGO -->
                         <span class="bg-slate-900 text-white font-black text-2xl sm:text-3xl px-5 py-2.5 rounded-2xl tracking-tight border border-slate-700 shadow-xl inline-block">
                             Porn<span class="text-rose-500">Wiki</span>
                         </span>
@@ -92,7 +91,7 @@
                     <label for="global-search" class="sr-only">Search encyclopedia</label>
                     <div class="relative">
                         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-                        <input type="text" id="global-search" onkeyup="handleSearch()" placeholder="Search performers, studios, positions, health protocols..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 transition">
+                        <input type="text" id="global-search" onkeyup="handleSearch()" placeholder="Search performers, studios, positions, health protocols, bisexual, lesbian..." class="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-4 py-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-rose-500 transition">
                     </div>
                 </div>
 
@@ -171,10 +170,11 @@
 
                 <div class="flex flex-wrap gap-2 text-xs font-medium">
                     <button onclick="setFilter('all')" id="filter-all" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white">All Entries</button>
-                    <button onclick="setFilter('Actress')" id="filter-Actress" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Performers</button>
-                    <button onclick="setFilter('Studio')" id="filter-Studio" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Studios</button>
-                    <button onclick="setFilter('Position')" id="filter-Position" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Positions</button>
-                    <button onclick="setFilter('Health')" id="filter-Health" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Health & Safety</button>
+                    <button onclick="setFilter('Actress')" id="filter-Actress" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Actress</button>
+                    <button onclick="setFilter('Actor')" id="filter-Actor" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Actor</button>
+                    <button onclick="setFilter('Trans')" id="filter-Trans" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Trans</button>
+                    <button onclick="setFilter('Studio')" id="filter-Studio" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Studio / Network</button>
+                    <button onclick="setFilter('Health')" id="filter-Health" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Industry Terms / Health</button>
                 </div>
             </div>
 
@@ -196,15 +196,37 @@
                         <label for="admin-passcode" class="block text-xs font-semibold text-slate-400 uppercase mb-1">Access Passcode</label>
                         <input type="password" id="admin-passcode" placeholder="Enter secure passcode" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-rose-500">
                     </div>
-                    <button onclick="authenticateAdmin()" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                    <button id="admin-login-btn" onclick="authenticateAdmin()" class="w-full bg-rose-600 hover:bg-rose-500 text-white font-bold py-2.5 rounded-xl text-xs transition">
                         Unlock Publishing Panel
                     </button>
-                    <p id="auth-error" class="text-rose-400 text-[11px] text-center hidden font-semibold">Invalid Passcode!</p>
+                    <p id="auth-error" class="text-rose-400 text-[11px] text-center hidden font-semibold"></p>
+                    <div id="lockout-timer-box" class="hidden text-center bg-rose-500/10 border border-rose-500/20 p-3 rounded-xl text-xs text-rose-300 font-mono">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Locked out due to multiple failed attempts. Try again in <span id="lockout-countdown" class="font-bold">15:00</span>.
+                    </div>
                 </div>
             </div>
 
             <div id="admin-desk" class="hidden space-y-6">
                 
+                <!-- GITHUB AUTO-SAVE SETTINGS BOX -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4">
+                    <div class="border-b border-slate-800 pb-3 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                                <i class="fa-brands fa-github text-rose-500"></i> GitHub Auto-Save Settings
+                            </h2>
+                            <p class="text-[11px] text-slate-400 mt-0.5">Enter your GitHub Personal Access Token (PAT) to enable auto-commits on publishing.</p>
+                        </div>
+                        <button onclick="saveGitHubToken()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-4 py-2 rounded-xl text-xs transition border border-slate-700">
+                            Save Token
+                        </button>
+                    </div>
+                    <div>
+                        <label for="github-token-input" class="block text-[11px] font-semibold text-slate-300 uppercase mb-1">GitHub Personal Access Token (PAT)</label>
+                        <input type="password" id="github-token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-rose-500 font-mono">
+                    </div>
+                </div>
+
                 <!-- GLOBAL AD INJECTOR CONFIGURATION PANEL -->
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-4">
                     <div class="border-b border-slate-800 pb-3 flex items-center justify-between">
@@ -252,14 +274,28 @@
                                 <label for="entry-name" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Entry Title / Name</label>
                                 <input type="text" id="entry-name" required placeholder="e.g. Angela White, Brazzers, Missionary Position" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white focus:border-rose-500">
                             </div>
-                            <div>
-                                <label for="entry-category" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Category</label>
-                                <select id="entry-category" onchange="switchAdminTemplate()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2 text-xs text-white focus:border-rose-500">
-                                    <option value="Actress">Performer (Actor / Model)</option>
-                                    <option value="Studio">Studio & Network</option>
-                                    <option value="Position">Sexual Position & Technique</option>
-                                    <option value="Health">Sexual Health & Safety Protocol</option>
-                                </select>
+                            
+                            <!-- DUAL CATEGORY SELECTION SYSTEM -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                <div>
+                                    <label for="entry-category" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Primary Role *</label>
+                                    <select id="entry-category" onchange="switchAdminTemplate()" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:border-rose-500">
+                                        <option value="Actress">Actress</option>
+                                        <option value="Actor">Actor</option>
+                                        <option value="Trans">Trans</option>
+                                        <option value="Studio">Studio / Network</option>
+                                        <option value="Health">Industry Terms / Health</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="entry-subcategory" class="block text-xs font-semibold text-slate-300 uppercase mb-1">Optional Sub-Category</label>
+                                    <select id="entry-subcategory" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:border-rose-500">
+                                        <option value="None">None</option>
+                                        <option value="Lesbian">Lesbian</option>
+                                        <option value="Bisexual">Bisexual</option>
+                                        <option value="Gay">Gay</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
@@ -329,28 +365,9 @@
                             </div>
                         </div>
 
-                        <!-- 3. POSITION TEMPLATE -->
-                        <div id="template-position" class="category-template hidden bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
-                            <h3 class="text-xs font-bold text-purple-400 uppercase tracking-wider"><i class="fa-solid fa-book-bookmark mr-1"></i> Position & Technique Parameters</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                                <div>
-                                    <label for="pos-difficulty" class="block text-[10px] text-slate-400 uppercase">Difficulty Level</label>
-                                    <input type="text" id="pos-difficulty" placeholder="Beginner / Intermediate / Advanced" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
-                                </div>
-                                <div>
-                                    <label for="pos-intimacy" class="block text-[10px] text-slate-400 uppercase">Intimacy & Closeness</label>
-                                    <input type="text" id="pos-intimacy" placeholder="High Eye Contact & Closeness" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
-                                </div>
-                                <div>
-                                    <label for="pos-origin" class="block text-[10px] text-slate-400 uppercase">Historical Origin</label>
-                                    <input type="text" id="pos-origin" placeholder="Traditional / Ancient" class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-white">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 4. HEALTH TEMPLATE -->
+                        <!-- 3. HEALTH TEMPLATE -->
                         <div id="template-health" class="category-template hidden bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-4">
-                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider"><i class="fa-solid fa-shield-heart mr-1"></i> Health Protocol Parameters</h3>
+                            <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider"><i class="fa-solid fa-shield-heart mr-1"></i> Industry Terms & Health Parameters</h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                                 <div>
                                     <label for="h-frequency" class="block text-[10px] text-slate-400 uppercase">Testing Frequency / Standard</label>
@@ -535,9 +552,10 @@
         <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
             
             <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-2 flex-wrap gap-y-1">
                     <span id="modal-category" class="text-[10px] font-mono font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2.5 py-1 rounded-full uppercase">Category</span>
-                    <h2 id="modal-title" class="text-xl font-extrabold text-white">Profile Name</h2>
+                    <span id="modal-subcategory" class="hidden text-[10px] font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-full uppercase">SubCategory</span>
+                    <h2 id="modal-title" class="text-xl font-extrabold text-white ml-2">Profile Name</h2>
                 </div>
                 <button onclick="closeModal()" aria-label="Close modal" class="text-slate-400 hover:text-white text-lg p-1">
                     <i class="fa-solid fa-xmark"></i>
@@ -572,7 +590,7 @@
                     <p id="modal-bio" class="leading-relaxed text-slate-300 whitespace-pre-line text-xs sm:text-sm"></p>
                 </div>
 
-                <!-- 1. IN-ARTICLE AD SLOT (Dynamically injected with script/HTML or default text) -->
+                <!-- IN-ARTICLE AD SLOT -->
                 <div id="dynamic-inarticle-ad-slot" class="my-6 p-4 bg-slate-950/80 border border-slate-800 rounded-lg text-center space-y-1">
                     <span class="text-[9px] uppercase tracking-widest text-slate-600 font-mono block">ADVERTISEMENT</span>
                     <p class="text-xs text-slate-500">Verified Industry Partner & Sponsored Reference Slot</p>
@@ -587,7 +605,11 @@
             </div>
 
             <div class="p-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between text-[11px] text-slate-400">
-                <span>PornWiki.org — Verified Media Registry</span>
+                <div class="flex items-center space-x-2">
+                    <button onclick="shareCurrentEntry()" class="bg-slate-800 hover:bg-rose-600 hover:text-white text-slate-200 px-3.5 py-1.5 rounded-lg transition font-semibold flex items-center gap-1.5" id="modal-share-btn">
+                        <i class="fa-solid fa-share-nodes"></i> <span id="share-btn-text">Share Entry</span>
+                    </button>
+                </div>
                 <button onclick="closeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-1.5 rounded-lg transition font-semibold">Close Entry</button>
             </div>
         </div>
@@ -603,11 +625,11 @@
         </div>
     </div>
 
-    <!-- STREAMLINED COMPACT FOOTER WITH PROMINENT LOGO & NORMAL SPACING + SECURITY.TXT COMPLIANCE + DYNAMIC SITEMAP -->
+    <!-- STREAMLINED COMPACT FOOTER -->
     <footer class="border-t border-slate-800 bg-slate-950 pt-6 pb-8 mt-12 text-slate-400 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             
-            <!-- 2. FOOTER TOP AD SLOT (Dynamically injected with script/HTML or default text) -->
+            <!-- FOOTER TOP AD SLOT -->
             <div id="dynamic-footer-ad-slot" class="p-4 bg-slate-900/60 border border-slate-800 rounded-lg text-center space-y-1">
                 <span class="text-[9px] uppercase tracking-widest text-slate-600 font-mono block">ADVERTISEMENT</span>
                 <p class="text-xs text-slate-500">Sponsored Industry Network & Directory Banner Slot</p>
@@ -615,7 +637,6 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                 
-                <!-- BRAND IDENTIFIER (OPTIMIZED FOOTER LOGO WITH NORMAL SPACING) -->
                 <div class="space-y-3">
                     <div class="flex items-center space-x-2">
                         <span class="bg-slate-900 text-white font-black text-3xl px-5 py-2.5 rounded-2xl tracking-tight border border-slate-700 shadow-xl inline-block">
@@ -627,7 +648,6 @@
                     </p>
                 </div>
 
-                <!-- EDITORIAL STANDARDS LINK COLUMN -->
                 <div>
                     <h4 class="font-bold text-slate-200 uppercase tracking-wider text-xs mb-2.5 flex items-center gap-2">
                         <i class="fa-solid fa-feather text-rose-500"></i> Editorial Standards
@@ -639,7 +659,6 @@
                     </ul>
                 </div>
 
-                <!-- LEGAL & GOVERNANCE LINK COLUMN (WITH SECURITY.TXT & XML SITEMAP) -->
                 <div>
                     <h4 class="font-bold text-slate-200 uppercase tracking-wider text-xs mb-2.5 flex items-center gap-2">
                         <i class="fa-solid fa-scale-balanced text-rose-500"></i> Legal & Governance
@@ -655,7 +674,6 @@
 
             </div>
 
-            <!-- FOOTER BOTTOM LEAN METADATA BAR -->
             <div class="border-t border-slate-900 pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
                 <p>© PornWiki.org — Verified Non-Explicit Adult Industry Database.</p>
                 <div class="flex items-center space-x-4 text-slate-400 font-mono text-xs">
@@ -673,6 +691,7 @@
                 id: "angela-white",
                 name: "Angela White",
                 category: "Actress",
+                subcategory: "None",
                 letter: "A",
                 birthdate: "March 4, 1985",
                 activeYears: "2003 - Present",
@@ -695,6 +714,7 @@
                 id: "brazzers-network",
                 name: "Brazzers Network",
                 category: "Studio",
+                subcategory: "None",
                 letter: "B",
                 hq: "Montreal, Canada",
                 founded: "2005",
@@ -713,6 +733,7 @@
                 id: "missionary-position",
                 name: "Missionary Position",
                 category: "Position",
+                subcategory: "None",
                 letter: "M",
                 difficulty: "Beginner",
                 intimacy: "High Eye Contact & Closeness",
@@ -731,6 +752,7 @@
                 id: "pass-testing-protocol",
                 name: "PASS Testing Standard",
                 category: "Health",
+                subcategory: "None",
                 letter: "P",
                 frequency: "Every 14 Days",
                 agency: "Independent Medical Laboratories",
@@ -748,6 +770,8 @@
 
         let isAdminAuthenticated = false;
         let isMainModalRevealed = false;
+        let currentModalItemId = null;
+        let lockoutTimerInterval = null;
 
         // LAZY LOADING INTERSECTION OBSERVER SETUP
         const lazyImageObserver = new IntersectionObserver((entries, observer) => {
@@ -800,8 +824,12 @@
 
             if(sectionId === 'browse') {
                 setFilter(filterParam);
-            } else if(sectionId === 'admin' && isAdminAuthenticated) {
-                renderAdminEntriesTable();
+            } else if(sectionId === 'admin') {
+                checkLockoutStatus();
+                if(isAdminAuthenticated) {
+                    renderAdminEntriesTable();
+                    loadGitHubTokenToInput();
+                }
             }
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -846,31 +874,37 @@
                 return;
             }
 
-            container.innerHTML = items.map(item => `
-                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col justify-between group shadow-md">
-                    <div>
-                        <div class="relative overflow-hidden bg-slate-950 h-44">
-                            <img data-src="${item.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3C/svg%3E" alt="${item.name}" class="lazy-load w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <span class="absolute top-2 right-2 text-[10px] font-bold px-2 py-0.5 rounded-md ${getBadgeStyle(item.category)}">
-                                ${item.category}
-                            </span>
-                        </div>
-                        <div class="p-4 space-y-2">
-                            <h3 class="font-bold text-white text-sm group-hover:text-rose-400 transition">${item.name}</h3>
-                            <div class="text-[11px] text-slate-400 space-y-0.5">
-                                <p><span class="text-slate-500">Details:</span> ${item.activeYears || item.hq || item.difficulty || item.frequency || 'N/A'}</p>
-                                <p><span class="text-slate-500">Origin:</span> ${item.nationality || item.origin || item.agency || 'N/A'}</p>
+            container.innerHTML = items.map(item => {
+                const subCat = item.subcategory && item.subcategory !== 'None' ? `<span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${getSubBadgeStyle(item.subcategory)}">${item.subcategory}</span>` : '';
+                return `
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition flex flex-col justify-between group shadow-md">
+                        <div>
+                            <div class="relative overflow-hidden bg-slate-950 h-44">
+                                <img data-src="${item.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3C/svg%3E" alt="${item.name}" class="lazy-load w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                <div class="absolute top-2 right-2 flex items-center gap-1.5">
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-md ${getBadgeStyle(item.category)}">
+                                        ${item.category}
+                                    </span>
+                                    ${subCat}
+                                </div>
                             </div>
-                            <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed pt-1">${item.bio}</p>
+                            <div class="p-4 space-y-2">
+                                <h3 class="font-bold text-white text-sm group-hover:text-rose-400 transition">${item.name}</h3>
+                                <div class="text-[11px] text-slate-400 space-y-0.5">
+                                    <p><span class="text-slate-500">Details:</span> ${item.activeYears || item.hq || item.difficulty || item.frequency || 'N/A'}</p>
+                                    <p><span class="text-slate-500">Origin:</span> ${item.nationality || item.origin || item.agency || 'N/A'}</p>
+                                </div>
+                                <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed pt-1">${item.bio}</p>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button onclick="openDetailModal('${item.id}')" class="w-full bg-slate-800 hover:bg-rose-600 hover:text-white text-slate-300 font-semibold py-2 rounded-lg text-xs transition">
+                                View Verified Entry
+                            </button>
                         </div>
                     </div>
-                    <div class="p-4 pt-0">
-                        <button onclick="openDetailModal('${item.id}')" class="w-full bg-slate-800 hover:bg-rose-600 hover:text-white text-slate-300 font-semibold py-2 rounded-lg text-xs transition">
-                            View Verified Entry
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             observeLazyImages();
         }
@@ -878,9 +912,19 @@
         function getBadgeStyle(cat) {
             switch(cat) {
                 case 'Actress': return 'bg-rose-500/20 text-rose-400 border border-rose-500/30';
+                case 'Actor': return 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30';
+                case 'Trans': return 'bg-pink-500/20 text-pink-400 border border-pink-500/30';
                 case 'Studio': return 'bg-blue-500/20 text-blue-400 border border-blue-500/30';
-                case 'Position': return 'bg-purple-500/20 text-purple-400 border border-purple-500/30';
                 case 'Health': return 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+                default: return 'bg-slate-800 text-slate-300';
+            }
+        }
+
+        function getSubBadgeStyle(sub) {
+            switch(sub) {
+                case 'Lesbian': return 'bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30';
+                case 'Bisexual': return 'bg-purple-500/20 text-purple-300 border border-purple-500/30';
+                case 'Gay': return 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30';
                 default: return 'bg-slate-800 text-slate-300';
             }
         }
@@ -889,7 +933,7 @@
             const filtered = cat === 'all' ? database : database.filter(d => d.category === cat);
             document.getElementById('browse-title').innerText = cat === 'all' ? "Encyclopedia Directory" : `${cat} Directory`;
             
-            ['all', 'Actress', 'Studio', 'Position', 'Health'].forEach(c => {
+            ['all', 'Actress', 'Actor', 'Trans', 'Studio', 'Health'].forEach(c => {
                 const btn = document.getElementById(`filter-${c}`);
                 if(btn) {
                     btn.className = c === cat ? 
@@ -913,7 +957,8 @@
             const matches = database.filter(item => 
                 item.name.toLowerCase().includes(query) || 
                 item.bio.toLowerCase().includes(query) ||
-                (item.category && item.category.toLowerCase().includes(query))
+                (item.category && item.category.toLowerCase().includes(query)) ||
+                (item.subcategory && item.subcategory.toLowerCase().includes(query))
             );
 
             document.getElementById('search-count').innerText = matches.length;
@@ -933,7 +978,8 @@
             const matches = database.filter(item => 
                 item.name.toLowerCase().includes(query) || 
                 item.bio.toLowerCase().includes(query) ||
-                (item.category && item.category.toLowerCase().includes(query))
+                (item.category && item.category.toLowerCase().includes(query)) ||
+                (item.subcategory && item.subcategory.toLowerCase().includes(query))
             );
 
             document.getElementById('search-count').innerText = matches.length;
@@ -947,18 +993,38 @@
             document.getElementById('search-results-section').classList.add('hidden');
         }
 
-        function openDetailModal(id) {
+        // URL HASH ROUTING & MODAL ENGINE
+        function openDetailModal(id, updateHash = true) {
             const item = database.find(d => d.id === id);
             if(!item) return;
 
-            document.getElementById('modal-category').innerText = item.category;
+            currentModalItemId = id;
+
+            if (updateHash) {
+                window.location.hash = `#${id}`;
+            }
+
+            const catEl = document.getElementById('modal-category');
+            const subCatEl = document.getElementById('modal-subcategory');
+
+            catEl.innerText = item.category;
+            catEl.className = `text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase ${getBadgeStyle(item.category)}`;
+
+            if (item.subcategory && item.subcategory !== 'None') {
+                subCatEl.innerText = item.subcategory;
+                subCatEl.className = `text-[10px] font-mono font-bold px-2.5 py-1 rounded-full uppercase ${getSubBadgeStyle(item.subcategory)}`;
+                subCatEl.classList.remove('hidden');
+            } else {
+                subCatEl.classList.add('hidden');
+            }
+
             document.getElementById('modal-title').innerText = item.name;
             document.getElementById('modal-bio').innerText = item.bio;
 
             const metaGrid = document.getElementById('modal-meta-grid');
             let metaHtml = '';
 
-            if (item.category === 'Actress') {
+            if (item.category === 'Actress' || item.category === 'Actor' || item.category === 'Trans') {
                 metaHtml = `
                     <div><span class="text-slate-500 block text-[10px] uppercase">Birthdate</span><strong class="text-white">${item.birthdate || 'N/A'}</strong></div>
                     <div><span class="text-slate-500 block text-[10px] uppercase">Active Era</span><strong class="text-white">${item.activeYears || 'N/A'}</strong></div>
@@ -975,13 +1041,6 @@
                     <div><span class="text-slate-500 block text-[10px] uppercase">Founded Year</span><strong class="text-white">${item.founded || 'N/A'}</strong></div>
                     <div><span class="text-slate-500 block text-[10px] uppercase">Parent Network</span><strong class="text-white">${item.parent || 'N/A'}</strong></div>
                     <div><span class="text-slate-500 block text-[10px] uppercase">Honors</span><strong class="text-blue-400">${item.awards || 'N/A'}</strong></div>
-                `;
-            } else if (item.category === 'Position') {
-                metaHtml = `
-                    <div><span class="text-slate-500 block text-[10px] uppercase">Difficulty Level</span><strong class="text-white">${item.difficulty || 'N/A'}</strong></div>
-                    <div><span class="text-slate-500 block text-[10px] uppercase">Intimacy Level</span><strong class="text-white">${item.intimacy || 'N/A'}</strong></div>
-                    <div><span class="text-slate-500 block text-[10px] uppercase">Historical Origin</span><strong class="text-white">${item.origin || 'N/A'}</strong></div>
-                    <div><span class="text-slate-500 block text-[10px] uppercase">Type</span><strong class="text-purple-400">Technique</strong></div>
                 `;
             } else if (item.category === 'Health') {
                 metaHtml = `
@@ -1024,6 +1083,74 @@
             document.getElementById('detail-modal').classList.remove('hidden');
         }
 
+        async function shareCurrentEntry() {
+            const item = database.find(d => d.id === currentModalItemId);
+            if (!item) return;
+
+            const shareUrl = window.location.href;
+            const shareTitle = `${item.name} — PornWiki Encyclopedia`;
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: shareTitle,
+                        url: shareUrl
+                    });
+                } catch (err) {
+                    console.log('Share canceled or failed:', err);
+                }
+            } else {
+                // Desktop fallback: copy link to clipboard
+                const textArea = document.createElement("textarea");
+                textArea.value = shareUrl;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    const shareText = document.getElementById('share-btn-text');
+                    shareText.innerText = "Link Copied!";
+                    setTimeout(() => {
+                        shareText.innerText = "Share Entry";
+                    }, 2000);
+                } catch (err) {
+                    alert("Could not copy link.");
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function closeModal(clearHash = true) {
+            document.getElementById('detail-modal').classList.add('hidden');
+            currentModalItemId = null;
+            if (clearHash && window.location.hash) {
+                history.pushState("", document.title, window.location.pathname + window.location.search);
+            }
+        }
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const item = database.find(d => d.id === hash);
+                if (item) {
+                    openDetailModal(hash, false);
+                } else {
+                    closeModal(false);
+                }
+            } else {
+                closeModal(false);
+            }
+        });
+
+        function checkInitialHashRoute() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const item = database.find(d => d.id === hash);
+                if (item) {
+                    openDetailModal(hash, false);
+                }
+            }
+        }
+
         function openLightbox(url) {
             const lightbox = document.getElementById('lightbox-modal');
             const lbImg = document.getElementById('lightbox-img');
@@ -1059,22 +1186,96 @@
             }
         }
 
-        function closeModal() {
-            document.getElementById('detail-modal').classList.add('hidden');
+        // ADMIN SECURITY & LOCKOUT ENGINE
+        function checkLockoutStatus() {
+            const lockoutUntil = localStorage.getItem('pornwiki_lockout_until');
+            if (lockoutUntil) {
+                const now = Date.now();
+                if (now < parseInt(lockoutUntil, 10)) {
+                    setLockedOutUI(true);
+                    startLockoutTimer(parseInt(lockoutUntil, 10));
+                } else {
+                    localStorage.removeItem('pornwiki_lockout_until');
+                    localStorage.setItem('pornwiki_failed_attempts', '0');
+                    setLockedOutUI(false);
+                }
+            }
+        }
+
+        function setLockedOutUI(isLocked) {
+            const btn = document.getElementById('admin-login-btn');
+            const input = document.getElementById('admin-passcode');
+            const timerBox = document.getElementById('lockout-timer-box');
+            const err = document.getElementById('auth-error');
+
+            if (isLocked) {
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                input.disabled = true;
+                timerBox.classList.remove('hidden');
+                err.classList.add('hidden');
+            } else {
+                btn.disabled = false;
+                btn.classList.remove('opacity-50', 'cursor-not-allowed');
+                input.disabled = false;
+                timerBox.classList.add('hidden');
+            }
+        }
+
+        function startLockoutTimer(targetTime) {
+            if (lockoutTimerInterval) clearInterval(lockoutTimerInterval);
+
+            const countdownEl = document.getElementById('lockout-countdown');
+            
+            lockoutTimerInterval = setInterval(() => {
+                const now = Date.now();
+                const remaining = Math.max(0, Math.floor((targetTime - now) / 1000));
+
+                const minutes = Math.floor(remaining / 60);
+                const seconds = remaining % 60;
+                countdownEl.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                if (remaining <= 0) {
+                    clearInterval(lockoutTimerInterval);
+                    localStorage.removeItem('pornwiki_lockout_until');
+                    localStorage.setItem('pornwiki_failed_attempts', '0');
+                    setLockedOutUI(false);
+                }
+            }, 1000);
         }
 
         function authenticateAdmin() {
+            const lockoutUntil = localStorage.getItem('pornwiki_lockout_until');
+            if (lockoutUntil && Date.now() < parseInt(lockoutUntil, 10)) {
+                return;
+            }
+
             const passcode = document.getElementById('admin-passcode').value;
             const err = document.getElementById('auth-error');
             
             if(passcode === "pornosexxnxx") {
                 isAdminAuthenticated = true;
+                localStorage.setItem('pornwiki_failed_attempts', '0');
                 document.getElementById('admin-auth-card').classList.add('hidden');
                 document.getElementById('admin-desk').classList.remove('hidden');
                 err.classList.add('hidden');
                 renderAdminEntriesTable();
+                loadGitHubTokenToInput();
             } else {
-                err.classList.remove('hidden');
+                let failed = parseInt(localStorage.getItem('pornwiki_failed_attempts') || '0', 10) + 1;
+                localStorage.setItem('pornwiki_failed_attempts', failed.toString());
+
+                const remainingAttempts = 3 - failed;
+
+                if (failed >= 3) {
+                    const lockoutTime = Date.now() + (15 * 60 * 1000); // 15 minutes lockout
+                    localStorage.setItem('pornwiki_lockout_until', lockoutTime.toString());
+                    setLockedOutUI(true);
+                    startLockoutTimer(lockoutTime);
+                } else {
+                    err.classList.remove('hidden');
+                    err.innerText = `Invalid Passcode! ${remainingAttempts} attempt(s) remaining before 15-minute lockout.`;
+                }
             }
         }
 
@@ -1084,6 +1285,71 @@
             document.getElementById('admin-auth-card').classList.remove('hidden');
             document.getElementById('admin-passcode').value = '';
             resetAdminForm();
+        }
+
+        function saveGitHubToken() {
+            const token = document.getElementById('github-token-input').value.trim();
+            if(!token) {
+                alert("Please enter a valid GitHub Token.");
+                return;
+            }
+            localStorage.setItem('gh_token', token);
+            alert("GitHub Personal Access Token saved successfully in your local browser storage!");
+        }
+
+        function loadGitHubTokenToInput() {
+            const token = localStorage.getItem('gh_token');
+            if(token) {
+                document.getElementById('github-token-input').value = token;
+            }
+        }
+
+        async function commitDatabaseToGitHub() {
+            const token = localStorage.getItem('gh_token');
+            if(!token) {
+                return;
+            }
+
+            const repoOwner = "pornwiki-official";
+            const repoName = "pornwiki";
+            const filePath = "index.html";
+            const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+            try {
+                const getRes = await fetch(apiUrl, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Accept": "application/vnd.github+json"
+                    }
+                });
+
+                if(!getRes.ok) throw new Error("Could not fetch repository file details for commit.");
+                const fileData = await getRes.json();
+                const sha = fileData.sha;
+
+                const currentHtml = document.documentElement.outerHTML;
+                const updatedContentBase64 = btoa(unescape(encodeURIComponent(currentHtml)));
+
+                const putRes = await fetch(apiUrl, {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Accept": "application/vnd.github+json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: "Auto-save: Updated encyclopedia database via Editor Desk",
+                        content: updatedContentBase64,
+                        sha: sha
+                    })
+                });
+
+                if(!putRes.ok) throw new Error("Failed to commit changes to GitHub repository.");
+                alert("GitHub-a yüklənir...\nUğurla yadda saxlanıldı! 20 saniyəyə saytda görünəcək.");
+            } catch (err) {
+                console.error("GitHub Auto-Save Error:", err);
+                alert("Local update successful! (GitHub auto-commit skipped: Please verify your GitHub Token or repository permissions).");
+            }
         }
 
         function saveGlobalAdCodes() {
@@ -1111,7 +1377,6 @@
                 `;
             }
 
-            // Execute scripts if any were injected
             const scripts = document.querySelectorAll('#dynamic-inarticle-ad-slot script, #dynamic-footer-ad-slot script');
             scripts.forEach(oldScript => {
                 const newScript = document.createElement('script');
@@ -1127,12 +1392,10 @@
             const cat = document.getElementById('entry-category').value;
             document.querySelectorAll('.category-template').forEach(el => el.classList.add('hidden'));
 
-            if(cat === 'Actress') {
+            if(cat === 'Actress' || cat === 'Actor' || cat === 'Trans') {
                 document.getElementById('template-performer').classList.remove('hidden');
             } else if(cat === 'Studio') {
                 document.getElementById('template-studio').classList.remove('hidden');
-            } else if(cat === 'Position') {
-                document.getElementById('template-position').classList.remove('hidden');
             } else if(cat === 'Health') {
                 document.getElementById('template-health').classList.remove('hidden');
             }
@@ -1142,6 +1405,7 @@
         function updateAutoTagsAndSERP() {
             const nameInput = document.getElementById('entry-name').value.trim();
             const category = document.getElementById('entry-category').value;
+            const subCategory = document.getElementById('entry-subcategory').value;
             const bioInput = document.getElementById('entry-bio').value.trim();
 
             const title = nameInput ? `${nameInput} — PornWiki Encyclopedia` : "New Entry Title — PornWiki Encyclopedia";
@@ -1153,16 +1417,10 @@
             document.getElementById('serp-slug').innerText = slug;
 
             const tagsContainer = document.getElementById('auto-tags-container');
-            let tags = ['encyclopedia', 'verified-metadata'];
+            let tags = ['encyclopedia', 'verified-metadata', category.toLowerCase()];
 
-            if (category === 'Actress') {
-                tags.push('performer', 'actor-model', 'biography', 'award-winner');
-            } else if (category === 'Studio') {
-                tags.push('studio-network', 'production-hq', 'digital-era', 'subscription-architecture');
-            } else if (category === 'Position') {
-                tags.push('sexual-technique', 'postural-standard', 'intimacy-guide');
-            } else if (category === 'Health') {
-                tags.push('health-protocol', 'sti-testing', 'workplace-safety', 'pass-standard');
+            if (subCategory && subCategory !== 'None') {
+                tags.push(subCategory.toLowerCase());
             }
 
             if(nameInput) {
@@ -1213,18 +1471,20 @@
             updateAutoTagsAndSERP();
         }
 
-        function handlePublishEntry(e) {
+        async function handlePublishEntry(e) {
             e.preventDefault();
             if(!isAdminAuthenticated) return;
 
             const editId = document.getElementById('edit-entry-id').value;
             const name = document.getElementById('entry-name').value;
             const category = document.getElementById('entry-category').value;
+            const subcategory = document.getElementById('entry-subcategory').value;
             
             let entryData = {
                 id: editId || name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
                 name: name,
                 category: category,
+                subcategory: subcategory,
                 letter: name.charAt(0).toUpperCase(),
                 image: document.getElementById('entry-main-img').value,
                 isSensitive: document.getElementById('entry-main-sensitive').checked,
@@ -1232,7 +1492,7 @@
                 bio: document.getElementById('entry-bio').value
             };
 
-            if (category === 'Actress') {
+            if (category === 'Actress' || category === 'Actor' || category === 'Trans') {
                 entryData.birthdate = document.getElementById('p-birthdate').value || "N/A";
                 entryData.height = document.getElementById('p-height').value || "N/A";
                 entryData.weight = document.getElementById('p-weight').value || "N/A";
@@ -1250,12 +1510,6 @@
                 entryData.parent = document.getElementById('s-parent').value || "Independent";
                 entryData.activeYears = entryData.founded;
                 entryData.awards = "Studio Network";
-            } else if (category === 'Position') {
-                entryData.difficulty = document.getElementById('pos-difficulty').value || "Moderate";
-                entryData.intimacy = document.getElementById('pos-intimacy').value || "Standard";
-                entryData.origin = document.getElementById('pos-origin').value || "Traditional";
-                entryData.activeYears = "Technique";
-                entryData.awards = "Postural Standard";
             } else if (category === 'Health') {
                 entryData.frequency = document.getElementById('h-frequency').value || "Standard";
                 entryData.agency = document.getElementById('h-agency').value || "Medical Labs";
@@ -1278,6 +1532,8 @@
             renderAdminEntriesTable();
             renderCards(database, 'featured-grid');
             renderCards(database, 'browse-cards-grid');
+
+            await commitDatabaseToGitHub();
         }
 
         function renderAdminEntriesTable() {
@@ -1296,7 +1552,12 @@
                         <img data-src="${item.image}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f172a'/%3E%3C/svg%3E" class="lazy-load w-8 h-8 rounded object-cover">
                         ${item.name}
                     </td>
-                    <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${getBadgeStyle(item.category)}">${item.category}</span></td>
+                    <td class="p-3">
+                        <div class="flex items-center gap-1.5">
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${getBadgeStyle(item.category)}">${item.category}</span>
+                            ${item.subcategory && item.subcategory !== 'None' ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold ${getSubBadgeStyle(item.subcategory)}">${item.subcategory}</span>` : ''}
+                        </div>
+                    </td>
                     <td class="p-3 text-slate-400">${item.activeYears || item.hq || item.difficulty || item.frequency || 'N/A'}</td>
                     <td class="p-3 text-right space-x-2">
                         <button onclick="editEntry('${item.id}')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1 rounded text-[11px] font-semibold transition">Edit</button>
@@ -1313,10 +1574,11 @@
 
             document.getElementById('edit-entry-id').value = item.id;
             document.getElementById('entry-name').value = item.name;
-            document.getElementById('entry-category').value = item.category;
+            document.getElementById('entry-category').value = item.category || 'Actress';
+            document.getElementById('entry-subcategory').value = item.subcategory || 'None';
             switchAdminTemplate();
 
-            if(item.category === 'Actress') {
+            if(item.category === 'Actress' || item.category === 'Actor' || item.category === 'Trans') {
                 document.getElementById('p-birthdate').value = item.birthdate || '';
                 document.getElementById('p-height').value = item.height || '';
                 document.getElementById('p-weight').value = item.weight || '';
@@ -1332,10 +1594,6 @@
                 document.getElementById('s-hq').value = item.hq || '';
                 document.getElementById('s-founded').value = item.founded || '';
                 document.getElementById('s-parent').value = item.parent || '';
-            } else if(item.category === 'Position') {
-                document.getElementById('pos-difficulty').value = item.difficulty || '';
-                document.getElementById('pos-intimacy').value = item.intimacy || '';
-                document.getElementById('pos-origin').value = item.origin || '';
             } else if(item.category === 'Health') {
                 document.getElementById('h-frequency').value = item.frequency || '';
                 document.getElementById('h-agency').value = item.agency || '';
@@ -1358,6 +1616,7 @@
         function resetAdminForm() {
             document.getElementById('publish-form').reset();
             document.getElementById('edit-entry-id').value = '';
+            document.getElementById('entry-subcategory').value = 'None';
             switchAdminTemplate();
             document.getElementById('admin-form-mode-label').innerText = `Editor Mode: Create New Entry`;
             document.getElementById('admin-form-heading').innerText = `Publish New Encyclopedia Entry`;
@@ -1365,7 +1624,7 @@
             document.getElementById('cancel-edit-btn').classList.add('hidden');
         }
 
-        function deleteEntry(id) {
+        async function deleteEntry(id) {
             const item = database.find(d => d.id === id);
             if(!item) return;
 
@@ -1375,6 +1634,7 @@
                 renderCards(database, 'featured-grid');
                 renderCards(database, 'browse-cards-grid');
                 alert(`Entry deleted successfully.`);
+                await commitDatabaseToGitHub();
             }
         }
 
@@ -1570,6 +1830,8 @@
             renderCards(database, 'browse-cards-grid');
             switchAdminTemplate();
             observeLazyImages();
+            checkInitialHashRoute();
+            checkLockoutStatus();
             
             const nameField = document.getElementById('entry-name');
             if(nameField) {
